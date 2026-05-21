@@ -29,6 +29,7 @@ venv/
 examples/*.pptx
 
 # Internal / not for repo
+a_supprimer/
 _archive/
 Ressources/
 aosis-deck-builder/scripts/*.before-chantier*.py
