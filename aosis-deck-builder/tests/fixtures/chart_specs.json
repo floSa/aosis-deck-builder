@@ -1,0 +1,56 @@
+{
+  "bar": {
+    "type": "bar",
+    "labels": ["Q1", "Q2", "Q3", "Q4"],
+    "values": [120, 145, 132, 168],
+    "y_label": "Revenu (k€)"
+  },
+  "barh": {
+    "type": "barh",
+    "labels": ["France", "Allemagne", "Italie", "Espagne"],
+    "values": [38, 27, 19, 16],
+    "x_label": "Part de marché (%)"
+  },
+  "bar_stacked": {
+    "type": "bar_stacked",
+    "labels": ["Q1", "Q2", "Q3", "Q4"],
+    "series": [
+      {"name": "Produit A", "values": [50, 60, 55, 70]},
+      {"name": "Produit B", "values": [70, 85, 77, 98]}
+    ],
+    "y_label": "Volume"
+  },
+  "line": {
+    "type": "line",
+    "labels": ["Jan", "Fév", "Mar", "Avr", "Mai"],
+    "series": [
+      {"name": "Réel",  "values": [100, 105, 112, 120, 128]},
+      {"name": "Cible", "values": [100, 110, 120, 130, 140]}
+    ],
+    "y_label": "Index (base 100)"
+  },
+  "donut": {
+    "type": "donut",
+    "labels": ["Cloud", "On-Prem", "Hybrid"],
+    "values": [45, 30, 25],
+    "center_text": "100 %"
+  },
+  "pie": {
+    "type": "pie",
+    "labels": ["Acquis", "En cours", "Pipeline"],
+    "values": [60, 25, 15]
+  },
+  "combo": {
+    "type": "combo",
+    "labels": ["Q1", "Q2", "Q3", "Q4"],
+    "bars": {"name": "Revenu",  "values": [120, 145, 132, 168]},
+    "line": {"name": "Marge %", "values": [25, 28, 26, 31]},
+    "y_label": "k€"
+  },
+  "waterfall": {
+    "type": "waterfall",
+    "labels": ["Start", "Gain A", "Gain B", "Loss", "End"],
+    "values": [100, 30, 20, -15, 135],
+    "y_label": "Index"
+  }
+}

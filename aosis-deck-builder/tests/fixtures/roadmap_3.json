@@ -1,0 +1,13 @@
+{
+  "cover": {"title": "Test roadmap 3 milestones", "ref": "Test"},
+  "slides": [{
+    "layout": "roadmap",
+    "title": "Test 3 milestones",
+    "milestones": [
+      {"date": "Juin '26", "name": "Audit",          "detail": "Cartographie + quick wins"},
+      {"date": "Nov '26",  "name": "First release",  "detail": "Premier lot en production"},
+      {"date": "Juin '27", "name": "Bascule",        "detail": "Plateforme historique éteinte"}
+    ]
+  }],
+  "closing": true
+}

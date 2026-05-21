@@ -1,0 +1,218 @@
+{
+  "slides": [
+    {
+      "layout": "cover",
+      "title": "Le Cloud Computing en 2026",
+      "subtitle": "Enjeux stratégiques, modèles de migration et facteurs clés de succès",
+      "ref": "Mai 2026",
+      "image_keyword": "cloud computing data center"
+    },
+    {
+      "layout": "agenda_diagonal",
+      "title": "Sommaire",
+      "image_keyword": "executive meeting strategy",
+      "items": [
+        {"title": "Le marché du cloud en 2026"},
+        {"title": "Trois stratégies de migration"},
+        {"title": "Étude de cas TechnoLog"},
+        {"title": "Risques et facteurs de succès"}
+      ]
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Un marché à 825 Mds$ qui ne ralentit plus",
+      "item_number": "01",
+      "image_keyword": "cloud servers technology"
+    },
+    {
+      "layout": "data_table",
+      "title": "Tous les segments cloud croissent à deux chiffres",
+      "source": "Sources : Gartner, IDC, Synergy Research — 2025",
+      "table": {
+        "headers": ["Indicateur", "2023", "2024", "2025 (est.)", "CAGR"],
+        "rows": [
+          ["Marché mondial cloud (Mds $)", "545", "675", "825",  "+22 %"],
+          ["Marché IaaS (Mds $)",          "143", "180", "230",  "+27 %"],
+          ["Marché SaaS (Mds $)",          "273", "320", "380",  "+18 %"],
+          ["Marché PaaS (Mds $)",          "129", "175", "215",  "+29 %"],
+          ["Entreprises multi-cloud (%)",  "74",  "82",  "89",   "+10 %"]
+        ],
+        "highlight_column": 4
+      }
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Adoption quasi-universelle, marché concentré sur 3 hyperscalers",
+      "blocks": [
+        {"type": "kpi_card", "value": "93 %", "label": "Fortune 500 avec ≥ 1 service cloud", "color": "orange"},
+        {"type": "kpi_card", "value": "89 %", "label": "Stratégie multi-cloud assumée",      "color": "navy"},
+        {"type": "bullets", "items": [
+          "AWS — 32 % part de marché",
+          "Microsoft Azure — 23 %",
+          "Google Cloud — 11 %"
+        ]},
+        {"type": "chart", "chart_spec": {
+          "type": "donut",
+          "labels": ["AWS", "Azure", "GCP", "Alibaba", "Autres"],
+          "values": [32, 23, 11, 6, 28],
+          "center_text": "100 %"
+        }}
+      ]
+    },
+    {
+      "layout": "data_table",
+      "title": "Bénéfices observés sur 30 missions à 24 mois post-bascule",
+      "source": "Synthèse AOSIS — 30 projets 2022-2025",
+      "table": {
+        "headers": ["KPI", "Avant migration", "Après migration", "Variation"],
+        "rows": [
+          ["Disponibilité applicative", "96,4 %",     "99,7 %",    "+3,3 pts"],
+          ["Délai provisionnement",    "23 jours",   "4 heures",  "-99 %"],
+          ["Time-to-market features",  "6,2 mois",   "3,4 mois",  "-45 %"],
+          ["TCO infrastructure / an",  "4,2 M€",     "3,1 M€",    "-26 %"],
+          ["Effort maintenance DSI",   "62 %",       "38 %",      "-24 pts"],
+          ["Empreinte carbone IT",     "100 (base)", "62",        "-38 %"]
+        ],
+        "highlight_column": 3
+      }
+    },
+    {
+      "layout": "quote_callout",
+      "title": "La voix d'un dirigeant industriel",
+      "takeaway": "Quand le time-to-market bouge, la part de marché suit.",
+      "quote_text": "Nous avons divisé par six notre délai de mise en production des nouveaux services. C'est ce qui nous a permis de doubler notre part de marché sur le segment digital en 18 mois.",
+      "quote_attribution": "— Marc Lefebvre, COO d'un groupe industriel européen (3,2 Mds € CA)",
+      "source": "Interviews AOSIS 2025"
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Trois stratégies de migration",
+      "item_number": "02",
+      "image_keyword": "business strategy whiteboard"
+    },
+    {
+      "layout": "data_table",
+      "title": "Replatform offre le meilleur ratio bénéfice/risque",
+      "source": "Synthèse AOSIS — recommandée dans 7 cas sur 10",
+      "table": {
+        "headers": ["Stratégie", "Effort", "Durée", "Coût", "Gain TCO", "Risque"],
+        "rows": [
+          ["Lift & Shift", "Faible", "12-18 mois", "€",   "-8 à -15 %",  "Faible"],
+          ["Replatform",   "Moyen",  "18-24 mois", "€€",  "-20 à -30 %", "Modéré"],
+          ["Refactor",     "Élevé",  "30-48 mois", "€€€", "-35 à -50 %", "Élevé"]
+        ],
+        "highlight_column": 4,
+        "highlight_row": 1
+      }
+    },
+    {
+      "layout": "kpi_with_chart",
+      "title": "Le statu quo est l'option la plus coûteuse à 5 ans",
+      "source": "Analyse AOSIS — périmètre standardisé 50 apps / 3 DC / 800 users",
+      "kpis": [
+        {"label": "Gain Replatform",    "value": "-26 %"},
+        {"label": "Écart vs statu quo", "value": "-5,9 M€"},
+        {"label": "Payback moyen",      "value": "24-36 m"}
+      ],
+      "chart": {
+        "type": "bar",
+        "labels": ["On-premise", "Lift & Shift", "Replatform", "Refactor"],
+        "values": [22.1, 18.5, 16.2, 14.8],
+        "y_label": "TCO cumulé 5 ans (M€)"
+      }
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "TechnoLog Industries en 22 mois",
+      "item_number": "03",
+      "image_keyword": "factory industrial production"
+    },
+    {
+      "layout": "comparison_before_after",
+      "title": "De 47 incidents par an à 99,8 % de disponibilité",
+      "takeaway": "Un saut mesurable sur 4 KPI en 22 mois.",
+      "source": "Étude de cas TechnoLog — 280 M€ CA, 850 employés",
+      "before": {
+        "title": "Avant migration (2023)",
+        "bullets": "Disponibilité 96,4 %\n47 incidents critiques/an\nTCO 4,2 M€/an\nMaintenance 62 % DSI"
+      },
+      "after": {
+        "title": "Après migration (2025)",
+        "bullets": "Disponibilité 99,8 %\n< 12 incidents/an attendus\nTCO 3,1 M€/an (-26 %)\nMaintenance 38 % DSI"
+      }
+    },
+    {
+      "layout": "data_table",
+      "title": "Cinq phases sur 22 mois, jamais en big bang",
+      "source": "Plan d'exécution AOSIS — stratégie Replatform AWS",
+      "table": {
+        "headers": ["Phase", "Période", "Durée", "Livrables clés"],
+        "rows": [
+          ["Phase 0 — Cadrage",        "M1-2",   "2 mois", "Landing Zone, gouvernance, FinOps"],
+          ["Phase 1 — Quick wins",     "M3-6",   "4 mois", "10-15 apps non-critiques"],
+          ["Phase 2 — Apps support",   "M7-12",  "6 mois", "15-20 applications support"],
+          ["Phase 3 — Apps critiques", "M13-18", "6 mois", "ERP, CRM, apps métier"],
+          ["Phase 4 — Optimisation",   "M19-24", "6 mois", "FinOps avancé, décom DC"]
+        ],
+        "highlight_column": 3
+      }
+    },
+
+    {
+      "layout": "data_table",
+      "title": "Six risques à neutraliser dès la Phase 0",
+      "source": "Cartographie AOSIS — 30 missions",
+      "table": {
+        "headers": ["Risque", "Probabilité", "Impact", "Mitigation"],
+        "rows": [
+          ["Dépassement budgétaire",     "Élevée",  "Élevé",      "FinOps dès Phase 0"],
+          ["Dépendance fournisseur",     "Moyenne", "Élevé",      "IaC portable, multi-cloud"],
+          ["Compétences insuffisantes",  "Élevée",  "Moyen",      "Formation, recrutement"],
+          ["Migration de données",       "Moyenne", "Élevé",      "POC, fenêtres planifiées"],
+          ["Conformité réglementaire",   "Faible",  "Très élevé", "Audit RGPD, région UE"],
+          ["Continuité de service",      "Faible",  "Très élevé", "Bascule par vagues, rollback"]
+        ],
+        "highlight_row": 0
+      }
+    },
+    {
+      "layout": "framework_3cards",
+      "title": "Trois piliers indispensables, aucun ne suffit seul",
+      "source": "Synthèse AOSIS — 30 missions",
+      "icons": ["mdi:account-tie", "mdi:school", "mdi:tools"],
+      "items": [
+        {"title": "Sponsorship CODIR",   "bullets": "Sponsor COO ou CEO\nCopil mensuel\nArbitrages au plus haut"},
+        {"title": "Compétences cloud",   "bullets": "2-3 certifs par personne\nCloud Center of Excellence\nFormation continue"},
+        {"title": "Méthode & outillage", "bullets": "Vagues de 6-8 apps\nIaC Terraform\nObservabilité dès J0"}
+      ]
+    },
+    {
+      "layout": "next_steps",
+      "title": "Quatre actions pour sécuriser le démarrage",
+      "source": "Plan d'action 90 jours",
+      "items": [
+        {"action": "Audit existant + cartographie", "owner": "DSI + partenaire", "date": "Mois 1"},
+        {"action": "Évaluation 3 options",          "owner": "CODIR + DSI",      "date": "Mois 2"},
+        {"action": "Choix partenaire cloud",        "owner": "Achats + DSI",     "date": "Mois 2-3"},
+        {"action": "Cadrage Phase 0",               "owner": "COO + DSI",        "date": "Mois 3"}
+      ]
+    },
+
+    {
+      "layout": "closing_diagonal",
+      "title": "Discutons de votre trajectoire",
+      "image_keyword": "business handshake success",
+      "question": "Vos questions ?",
+      "author_name": "Florian Horellou",
+      "author_email": "florian.horellou@aosis.net",
+      "author_phone": "+33 6 36 26 17 47"
+    },
+    {
+      "layout": "final_branding"
+    }
+  ],
+  "closing": false
+}

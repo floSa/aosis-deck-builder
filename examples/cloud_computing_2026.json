@@ -1,0 +1,209 @@
+{
+  "slides": [
+    {
+      "layout": "cover",
+      "title": "Le Cloud Computing en 2026",
+      "subtitle": "Enjeux stratégiques, modèles de migration et facteurs clés de succès",
+      "ref": "Mai 2026"
+    },
+    {
+      "layout": "agenda_diagonal",
+      "title": "Sommaire",
+      "image_keyword": "executive meeting strategy",
+      "items": [
+        {"title": "Le marché du cloud en 2026"},
+        {"title": "Les enjeux qui motivent la migration"},
+        {"title": "Trois stratégies, une recommandation"},
+        {"title": "Étude de cas : TechnoLog Industries"},
+        {"title": "Risques et facteurs clés de succès"},
+        {"title": "Conclusion et plan d'action"}
+      ]
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Un marché à 825 Mds$ qui ne ralentit plus",
+      "item_number": "01",
+      "image_keyword": "cloud computing data center"
+    },
+    {
+      "layout": "kpi_with_chart",
+      "title": "Le débat n'est plus de migrer, mais à quel rythme",
+      "source": "Sources : Gartner, IDC, Synergy Research — 2025",
+      "kpis": [
+        {"label": "Marché mondial 2025", "value": "825 Mds$"},
+        {"label": "Fortune 500 adoptés", "value": "93 %"},
+        {"label": "Multi-cloud assumé", "value": "89 %"}
+      ],
+      "chart": {
+        "type": "line",
+        "labels": ["2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+        "series": [
+          {"name": "% entreprises adoptant le cloud", "values": [42, 51, 63, 72, 81, 88, 93]}
+        ],
+        "y_label": "% Fortune 500"
+      }
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Pourquoi les organisations migrent",
+      "item_number": "02",
+      "image_keyword": "team office discussion"
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Quatre bénéfices reproductibles sur 30 missions à 24 mois",
+      "blocks": [
+        {"type": "kpi_card", "value": "+3,3 pts", "label": "disponibilité applicative", "color": "green"},
+        {"type": "kpi_card", "value": "-99 %",   "label": "délai provisionnement",      "color": "orange"},
+        {"type": "kpi_card", "value": "-26 %",   "label": "TCO infrastructure 5 ans",   "color": "orange"},
+        {"type": "kpi_card", "value": "-38 %",   "label": "empreinte carbone IT",       "color": "green"}
+      ]
+    },
+    {
+      "layout": "quote_callout",
+      "title": "Ce que disent les dirigeants",
+      "takeaway": "Quand le time-to-market bouge, la part de marché suit.",
+      "quote_text": "Nous avons divisé par six notre délai de mise en production des nouveaux services. C'est ce qui nous a permis de doubler notre part de marché sur le segment digital en 18 mois.",
+      "quote_attribution": "— Marc Lefebvre, COO d'un groupe industriel européen (3,2 Mds € CA)",
+      "source": "Interviews AOSIS 2025"
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Trois trajectoires possibles, une recommandation",
+      "item_number": "03",
+      "image_keyword": "business strategy whiteboard"
+    },
+    {
+      "layout": "kpi_with_chart",
+      "title": "Le statu quo est l'option la plus coûteuse à 5 ans",
+      "source": "Analyse AOSIS — périmètre standardisé : 50 apps, 3 datacenters, 800 utilisateurs",
+      "kpis": [
+        {"label": "Gain Replatform", "value": "-26 %"},
+        {"label": "Écart vs statu quo", "value": "-5,9 M€"},
+        {"label": "Payback moyen", "value": "24-36 m"}
+      ],
+      "chart": {
+        "type": "bar",
+        "labels": ["On-premise", "Lift & Shift", "Replatform", "Refactor"],
+        "values": [22.1, 18.5, 16.2, 14.8],
+        "y_label": "TCO cumulé 5 ans (M€)"
+      }
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "TechnoLog : 22 mois pour décommissionner le datacenter de Lyon",
+      "item_number": "04",
+      "image_keyword": "factory production line"
+    },
+    {
+      "layout": "comparison_before_after",
+      "title": "De 47 incidents par an à 99,8 % de disponibilité",
+      "takeaway": "Un saut mesurable sur les 4 KPI majeurs en 22 mois.",
+      "source": "Étude de cas TechnoLog Industries — 280 M€ CA, 850 employés",
+      "before": {
+        "title": "Avant migration (2023)",
+        "bullets": "Disponibilité 96,4 %\n47 incidents critiques/an\nTCO 4,2 M€/an\nMaintenance 62 % du temps DSI"
+      },
+      "after": {
+        "title": "Après migration (2025)",
+        "bullets": "Disponibilité 99,8 %\nMoins de 12 incidents attendus\nTCO 3,1 M€/an (-26 %)\nMaintenance 38 % du temps DSI"
+      }
+    },
+    {
+      "layout": "roadmap_styled",
+      "title": "Cinq phases sur 22 mois, jamais en big bang",
+      "source": "Plan d'exécution AOSIS — stratégie Replatform AWS",
+      "items": [
+        {"date": "M1-2",   "milestone": "Cadrage — Landing Zone, FinOps"},
+        {"date": "M3-6",   "milestone": "Quick wins — 10-15 apps non critiques"},
+        {"date": "M7-12",  "milestone": "Apps support — 15-20 applications"},
+        {"date": "M13-18", "milestone": "Apps critiques — ERP, CRM, métier"},
+        {"date": "M19-24", "milestone": "Optimisation — FinOps avancé, décom"}
+      ]
+    },
+
+    {
+      "layout": "framework_3cards",
+      "title": "Trois piliers indispensables, aucun ne suffit seul",
+      "source": "Synthèse AOSIS sur 30 missions de migration",
+      "icons": ["mdi:account-tie", "mdi:school", "mdi:tools"],
+      "items": [
+        {"title": "Sponsorship CODIR",   "bullets": "Sponsor COO ou CEO\nCopil mensuel\nArbitrages au plus haut"},
+        {"title": "Compétences cloud",   "bullets": "2-3 certifs par personne\nCloud Center of Excellence\nFormation continue"},
+        {"title": "Méthode & outillage", "bullets": "Vagues de 6-8 apps\nIaC Terraform\nObservabilité dès J0"}
+      ]
+    },
+    {
+      "layout": "matrix_2x2_styled",
+      "title": "Six risques à neutraliser dès la Phase 0",
+      "source": "Cartographie AOSIS — 30 missions analysées",
+      "x_axis": {"label": "Probabilité", "low": "Faible", "high": "Élevée"},
+      "y_axis": {"label": "Impact",      "low": "Moyen",  "high": "Élevé"},
+      "quadrants": {
+        "top_left": {
+          "title": "À mitiger systématiquement",
+          "items": ["Conformité réglementaire", "Continuité de service", "Migration de données"]
+        },
+        "top_right": {
+          "title": "Risques prioritaires",
+          "items": ["Dépassement budgétaire", "Dépendance fournisseur"]
+        },
+        "bottom_right": {
+          "title": "À surveiller",
+          "items": ["Compétences insuffisantes"]
+        },
+        "bottom_left": {
+          "title": "À monitorer",
+          "items": ["Risques résiduels faibles"]
+        }
+      }
+    },
+
+    {
+      "layout": "executive_summary",
+      "title": "Trois convictions à porter au CODIR",
+      "takeaway": "Le succès dépend autant de l'organisation que de la technologie.",
+      "source": "Conclusion AOSIS — Mai 2026",
+      "items": [
+        {
+          "title": "Le statu quo est l'option la plus coûteuse",
+          "bullets": "20 à 40 % plus cher sur 5 ans\nCoûts d'opportunité importants\nDécision à porter avant 2027"
+        },
+        {
+          "title": "Replatform offre le meilleur ratio",
+          "bullets": "Recommandé dans 7 cas sur 10\nGain TCO -20 à -30 %\nDurée 18-24 mois maîtrisée"
+        },
+        {
+          "title": "Le succès dépend d'abord de l'organisation",
+          "bullets": "Sponsorship CODIR\nGouvernance FinOps\nMontée en compétences"
+        }
+      ]
+    },
+    {
+      "layout": "next_steps",
+      "title": "Quatre actions pour sécuriser le démarrage",
+      "source": "Plan d'action 90 jours",
+      "items": [
+        {"action": "Audit existant + cartographie applicative", "owner": "DSI + partenaire", "date": "Mois 1"},
+        {"action": "Évaluation des 3 options stratégiques",     "owner": "CODIR + DSI",      "date": "Mois 2"},
+        {"action": "Choix partenaire cloud + négociation",      "owner": "Achats + DSI",     "date": "Mois 2-3"},
+        {"action": "Cadrage Phase 0 + démarrage gouvernance",   "owner": "COO + DSI",        "date": "Mois 3"}
+      ]
+    },
+
+    {
+      "layout": "closing_diagonal",
+      "title": "Discutons de votre trajectoire",
+      "image_keyword": "business handshake success",
+      "question": "Vos questions ?",
+      "author_name": "Florian Horellou",
+      "author_email": "florian.horellou@aosis.net",
+      "author_phone": "+33 6 36 26 17 47"
+    }
+  ],
+  "closing": false
+}

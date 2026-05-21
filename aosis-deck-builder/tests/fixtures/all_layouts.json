@@ -1,0 +1,187 @@
+{
+  "cover": {"title": "All layouts smoke test", "ref": "Test"},
+  "slides": [
+    {
+      "layout": "section",
+      "title": "Section divider",
+      "ref": "1/N"
+    },
+    {
+      "layout": "text",
+      "title": "Plain text fallback",
+      "bullets": ["First bullet", "Second bullet", "Third bullet"]
+    },
+    {
+      "layout": "content",
+      "title": "Content with bullets only (no image)",
+      "bullets": ["Bullet one", "Bullet two"]
+    },
+    {
+      "layout": "hero_stat",
+      "title": "HERO STAT",
+      "value": "-75%",
+      "label": "Action sentence under the giant number",
+      "context": "Optional grey context line",
+      "supporting": ["Supporting point one", "Supporting point two"]
+    },
+    {
+      "layout": "big_idea",
+      "title": "CONVICTION",
+      "idea": "A single bold thesis statement that lands the framing of the deck.",
+      "supports": [
+        {"title": "First support", "detail": "Detail one"},
+        {"title": "Second support", "detail": "Detail two"}
+      ],
+      "attribution": "Direction AOSIS"
+    },
+    {
+      "layout": "matrix_2x2",
+      "title": "Strategic priority matrix",
+      "x_axis": {"label": "Effort", "low": "Faible", "high": "Élevé"},
+      "y_axis": {"label": "Impact", "low": "Faible", "high": "Élevé"},
+      "quadrants": {
+        "top_left":     {"title": "Quick wins",     "items": ["Item A"]},
+        "top_right":    {"title": "Strategic",      "items": ["Item B", "Item C"]},
+        "bottom_left":  {"title": "Hygiene",        "items": ["Item D"]},
+        "bottom_right": {"title": "Deprioritise",   "items": ["Item E"]}
+      }
+    },
+    {
+      "layout": "swot",
+      "title": "SWOT classique",
+      "strengths":     {"title": "Strengths",     "items": ["S1", "S2"]},
+      "weaknesses":    {"title": "Weaknesses",    "items": ["W1", "W2"]},
+      "opportunities": {"title": "Opportunities", "items": ["O1", "O2"]},
+      "threats":       {"title": "Threats",       "items": ["T1", "T2"]}
+    },
+    {
+      "layout": "pyramid",
+      "title": "Hierarchical framework",
+      "levels": [
+        {"name": "Foundation", "detail": "Base layer"},
+        {"name": "Middle",     "detail": "Support"},
+        {"name": "Apex",       "detail": "Top goal"}
+      ]
+    },
+    {
+      "layout": "funnel",
+      "title": "Conversion funnel",
+      "stages": [
+        {"name": "Stage 0", "value": "100", "detail": "Initial"},
+        {"name": "Stage 1", "value": "60",  "detail": "Qualified"},
+        {"name": "Stage 2", "value": "25",  "detail": "Converted"}
+      ]
+    },
+    {
+      "layout": "roadmap",
+      "title": "Roadmap milestones",
+      "milestones": [
+        {"date": "Juin '26", "name": "M1", "detail": "First milestone"},
+        {"date": "Sept '26", "name": "M2", "detail": "Second milestone"},
+        {"date": "Déc '26",  "name": "M3", "detail": "Third milestone"}
+      ]
+    },
+    {
+      "layout": "dashboard",
+      "title": "Executive dashboard",
+      "stats": [
+        {"value": "1,2 M€", "label": "Budget"},
+        {"value": "6",      "label": "Consultants"},
+        {"value": "12 m",   "label": "Duration"}
+      ],
+      "chart": {
+        "type": "line",
+        "labels": ["T0", "T+3", "T+6", "T+9", "T+12"],
+        "data":   [8, 7.5, 6, 4, 2]
+      },
+      "chart_title": "TIME TO PRODUCE (HOURS)"
+    },
+    {
+      "layout": "org_chart",
+      "title": "Team mobilised",
+      "leader": {"name": "A. Leader", "role": "Mission director"},
+      "reports": [
+        {"name": "B. Architect", "role": "Lead architect", "members": ["Eng1", "Eng2"]},
+        {"name": "C. Analyst",   "role": "Data analyst",   "members": ["Ana1"]}
+      ]
+    },
+    {
+      "layout": "agenda",
+      "title": "Talk agenda",
+      "items": [
+        {"title": "Introduction",    "detail": "5 min"},
+        {"title": "Diagnostic",      "detail": "15 min"},
+        {"title": "Recommandations", "detail": "20 min"},
+        {"title": "Q&R",             "detail": "10 min"}
+      ]
+    },
+    {
+      "layout": "stat_grid",
+      "title": "Key numbers",
+      "stats": [
+        {"value": "1,2 M€", "label": "Budget"},
+        {"value": "6",      "label": "Team"},
+        {"value": "12 m",   "label": "Duration"},
+        {"value": "100%",   "label": "Coverage"}
+      ],
+      "footnote": "Excluding VAT"
+    },
+    {
+      "layout": "timeline",
+      "title": "Methodology phases",
+      "phases": [
+        {"name": "Audit",      "duration": "6 sem",  "detail": "Quick wins"},
+        {"name": "Conception", "duration": "8 sem",  "detail": "Architecture"},
+        {"name": "Build",      "duration": "6 mois", "detail": "Development"},
+        {"name": "Run",        "duration": "4 mois", "detail": "Operations"}
+      ]
+    },
+    {
+      "layout": "cards",
+      "title": "Team cards",
+      "columns": 3,
+      "cards": [
+        {"badge": "01", "title": "Director",  "body": "10 yrs experience"},
+        {"badge": "02", "title": "Architect", "body": "Cloud + data"},
+        {"badge": "03", "title": "Engineers", "body": "3 data engineers"}
+      ]
+    },
+    {
+      "layout": "comparison",
+      "title": "Before vs after",
+      "left":  {"title": "Today",  "subtitle": "(current)", "items": ["8h cycle", "40+ batches"]},
+      "right": {"title": "Target", "subtitle": "(T+12 m)",  "items": ["2h cycle", "Orchestrated"]}
+    },
+    {
+      "layout": "chart",
+      "title": "Trajectory over 12 months",
+      "chart": {
+        "type": "bar",
+        "labels": ["Q1", "Q2", "Q3", "Q4"],
+        "data":   [10, 20, 35, 60]
+      },
+      "commentary": ["Acceleration in Q3", "Target reached in Q4"]
+    },
+    {
+      "layout": "process",
+      "title": "Decision process",
+      "steps": [
+        {"name": "Receive", "detail": "Intake"},
+        {"name": "Review",  "detail": "Committee"},
+        {"name": "Decide",  "detail": "Approve / reject"}
+      ]
+    },
+    {
+      "layout": "quote",
+      "text": "We don't deliver a platform — we deliver a new way of producing data.",
+      "author": "AOSIS"
+    },
+    {
+      "layout": "image_hero",
+      "image": "_placeholder.png",
+      "title": "Image hero overlay",
+      "subtitle": "Subtitle on navy band"
+    }
+  ],
+  "closing": true
+}

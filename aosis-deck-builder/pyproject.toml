@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aosis-deck-builder"
+version = "0.2.0"
+description = "AOSIS-branded PowerPoint deck builder skill"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "AOSIS" }]
+dependencies = [
+    # python-pptx 1.0.2 validated end-to-end across chantiers 1-4
+    "python-pptx>=1.0.2,<2",
+    # matplotlib only needed for `chart` and `dashboard` layouts (lazy-imported).
+    # 3.10 validated; 3.7 is the floor where the AOSIS palette rendering still
+    # works correctly.
+    "matplotlib>=3.7,<4",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0,<9",
+]
+
+[tool.setuptools]
+# This package is a Claude skill, not a distributable Python lib — there's no
+# code to install under site-packages. We only need the metadata for pip to
+# resolve dependencies. py-modules left empty so setuptools doesn't try to
+# auto-discover anything.
+py-modules = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers"]

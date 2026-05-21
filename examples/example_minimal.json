@@ -1,0 +1,33 @@
+{
+  "cover": {
+    "title": "Refonder le reporting risque",
+    "ref": "Mai 2026"
+  },
+  "slides": [
+    {
+      "layout": "hero_stat",
+      "title":  "L'AMBITION",
+      "value":  "-75%",
+      "label":  "Le temps de production que nous allons reprendre"
+    },
+    {
+      "layout": "roadmap",
+      "title":  "Le chemin sur 12 mois",
+      "milestones": [
+        {"date": "Juin '26", "name": "Audit",         "detail": "Cartographie de l'existant"},
+        {"date": "Nov '26",  "name": "First release", "detail": "Premier lot livré"},
+        {"date": "Juin '27", "name": "Bascule",       "detail": "Plateforme cible en service"}
+      ]
+    },
+    {
+      "layout": "text",
+      "title": "Prochaines étapes",
+      "bullets": [
+        "Cadrage détaillé avec le sponsor (S+1)",
+        "Constitution de l'équipe projet (S+2)",
+        "Kick-off et début de l'audit (S+3)"
+      ]
+    }
+  ],
+  "closing": true
+}

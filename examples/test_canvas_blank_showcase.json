@@ -1,0 +1,103 @@
+{
+  "slides": [
+    {
+      "layout": "canvas_blank",
+      "title": "Un bloc texte plein cadre",
+      "blocks": [
+        {"type": "text", "content": "La replatformisation cloud n'est pas seulement un projet d'infrastructure. C'est un programme de transformation qui touche l'organisation, les compétences, les processus et la culture IT. Réussir suppose un alignement CODIR fort dès le démarrage et une gouvernance trimestrielle continue sur les 22 mois du programme."}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Quatre KPI clés du diagnostic",
+      "blocks": [
+        {"type": "kpi_card", "value": "87 %",  "label": "saturation datacenter", "color": "orange"},
+        {"type": "kpi_card", "value": "23 j",  "label": "délai provisionnement", "color": "navy"},
+        {"type": "kpi_card", "value": "47",    "label": "incidents critiques 2025", "color": "red"},
+        {"type": "kpi_card", "value": "62 %",  "label": "effort maintenance DSI", "color": "orange"}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Bullets à gauche, image à droite",
+      "blocks": [
+        {"type": "bullets", "items": [
+          "Datacenter Lyon saturé à 87 %",
+          "Contrat colocation expire fin 2027",
+          "Aucune capacité de scaling pour pics saisonniers",
+          "Coûts en hausse +18 % sur 3 ans"
+        ]},
+        {"type": "image", "keyword": "data center server room"}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Chart à droite, deux KPI à gauche",
+      "blocks": [
+        {"type": "kpi_card", "value": "-26 %", "label": "TCO 2028 vs 2025", "color": "orange"},
+        {"type": "kpi_card", "value": "32 m",  "label": "payback investissement", "color": "navy"},
+        {"type": "chart", "chart_spec": {
+          "type": "line",
+          "labels": ["2025", "2026", "2027", "2028", "2029"],
+          "series": [
+            {"name": "Avec migration", "values": [4.2, 4.4, 3.8, 3.1, 2.9]},
+            {"name": "Statu quo",      "values": [4.2, 4.6, 5.0, 5.4, 5.8]}
+          ]
+        }}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Six KPI en grille 3×2",
+      "blocks": [
+        {"type": "kpi_card", "value": "280 M€", "label": "chiffre d'affaires"},
+        {"type": "kpi_card", "value": "850",    "label": "employés"},
+        {"type": "kpi_card", "value": "3",      "label": "sites france"},
+        {"type": "kpi_card", "value": "47",     "label": "applications"},
+        {"type": "kpi_card", "value": "87 %",   "label": "saturation DC"},
+        {"type": "kpi_card", "value": "1.8 M€", "label": "dette technique"}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Une citation accompagnée d'une image",
+      "blocks": [
+        {"type": "quote",
+         "content": "Notre ERP doit être disponible 24/7 pendant les pics de production. Aujourd'hui ce n'est plus tenable.",
+         "author": "Marc Lefèvre — COO TechnoLog"},
+        {"type": "image", "keyword": "factory production line"}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Trois bullets et un chart en grille",
+      "blocks": [
+        {"type": "bullets", "items": [
+          "Statu quo : 22.1 M€",
+          "Lift & Shift : 18.5 M€",
+          "Replatform : 16.2 M€"
+        ]},
+        {"type": "chart", "chart_spec": {
+          "type": "bar",
+          "labels": ["Statu quo", "Lift", "Replatform", "Refactor"],
+          "values": [22.1, 18.5, 16.2, 14.8]
+        }}
+      ]
+    },
+    {
+      "layout": "canvas_blank",
+      "title": "Composition libre — 5 blocks",
+      "blocks": [
+        {"type": "kpi_card", "value": "99.8 %", "label": "disponibilité cible"},
+        {"type": "kpi_card", "value": "-45 %",  "label": "time-to-market"},
+        {"type": "kpi_card", "value": "-38 %",  "label": "empreinte carbone"},
+        {"type": "bullets", "items": [
+          "Migration AWS replatform",
+          "FinOps intégré"
+        ]},
+        {"type": "text", "content": "La cible : un SI moderne, observable, scalable et sobre."}
+      ]
+    }
+  ],
+  "closing": false
+}
