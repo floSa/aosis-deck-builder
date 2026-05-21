@@ -1054,12 +1054,14 @@ def test_pexels_api_used_when_key_present(tmp_path, monkeypatch):
     import image_engine
 
     monkeypatch.setenv("PEXELS_API_KEY", "fake-key-1234")
+    # Chantier 22 — disable cache to ensure the mock is called
+    image_engine.set_cache_enabled(False)
     captured = {}
 
-    def fake_pexels(keyword, w, h, api_key, timeout=5.0):
+    def fake_pexels(keyword, w, h, api_key, orientation="landscape", timeout=5.0):
         captured["keyword"] = keyword
         captured["api_key"] = api_key
-        return b"FAKE_PNG_BYTES"
+        return (b"FAKE_PNG_BYTES", {"keyword": keyword})
 
     def picsum_should_not_run(*a, **kw):
         raise AssertionError("Picsum should not have been called when Pexels succeeded")
@@ -1067,10 +1069,13 @@ def test_pexels_api_used_when_key_present(tmp_path, monkeypatch):
     monkeypatch.setattr(image_engine, "_fetch_pexels", fake_pexels)
     monkeypatch.setattr(image_engine, "_fetch_picsum", picsum_should_not_run)
 
-    result = image_engine.fetch_image_for_slide("cloud computing", 1000000, 800000)
-    assert result == b"FAKE_PNG_BYTES"
-    assert captured["keyword"] == "cloud computing"
-    assert captured["api_key"] == "fake-key-1234"
+    try:
+        result = image_engine.fetch_image_for_slide("cloud computing", 1000000, 800000)
+        assert result == b"FAKE_PNG_BYTES"
+        assert captured["keyword"] == "cloud computing"
+        assert captured["api_key"] == "fake-key-1234"
+    finally:
+        image_engine.set_cache_enabled(True)
 
 
 def test_image_engine_falls_back_to_picsum_on_pexels_error(monkeypatch):
@@ -2279,6 +2284,92 @@ def test_kpi_vertical_layout(tmp_path):
         assert vx == lx, (
             f"KPI #{i+1}: value x {vx} != label x {lx}"
         )
+
+
+# =============================================================================
+# Chantier 22 — Pexels disk cache
+# =============================================================================
+def test_image_cache_hit_avoids_network_call(monkeypatch, tmp_path):
+    """Second call with same (keyword, orientation, dimensions) must hit the
+    cache: _fetch_pexels is called once, not twice."""
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import image_engine
+    monkeypatch.setattr(image_engine, "CACHE_DIR", tmp_path / "cache")
+    monkeypatch.setenv("PEXELS_API_KEY", "fake-key")
+    image_engine.set_cache_enabled(True)
+
+    call_count = {"n": 0}
+
+    def fake_pexels(keyword, w, h, api_key, orientation="landscape", timeout=5.0):
+        call_count["n"] += 1
+        return (b"PNG_BYTES_FAKE", {"keyword": keyword,
+                                     "pexels_photo_id": "123"})
+
+    monkeypatch.setattr(image_engine, "_fetch_pexels", fake_pexels)
+
+    # First call → MISS, populates cache
+    r1 = image_engine.fetch_image_for_slide("data center", 1000000, 800000)
+    assert r1 == b"PNG_BYTES_FAKE"
+    assert call_count["n"] == 1
+
+    # Second call same args → HIT, no new fetch
+    r2 = image_engine.fetch_image_for_slide("data center", 1000000, 800000)
+    assert r2 == b"PNG_BYTES_FAKE"
+    assert call_count["n"] == 1, (
+        f"second call should HIT cache, got {call_count['n']} fetches"
+    )
+
+    # Metadata file written alongside image
+    cache_files = list((tmp_path / "cache").iterdir())
+    jpgs = [f for f in cache_files if f.suffix == ".jpg"]
+    jsons = [f for f in cache_files if f.suffix == ".json"]
+    assert len(jpgs) == 1 and len(jsons) == 1
+    meta = json.loads(jsons[0].read_text())
+    assert meta["pexels_photo_id"] == "123"
+    assert "downloaded_at" not in meta or isinstance(meta.get("downloaded_at", ""), str)
+
+
+def test_image_cache_miss_calls_pexels(monkeypatch, tmp_path):
+    """With an empty cache, Pexels IS called and the result is cached."""
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import image_engine
+    monkeypatch.setattr(image_engine, "CACHE_DIR", tmp_path / "cache")
+    monkeypatch.setenv("PEXELS_API_KEY", "fake-key")
+    image_engine.set_cache_enabled(True)
+
+    called = {"n": 0}
+
+    def fake_pexels(keyword, w, h, api_key, orientation="landscape", timeout=5.0):
+        called["n"] += 1
+        return (b"BYTES", {"keyword": keyword})
+
+    monkeypatch.setattr(image_engine, "_fetch_pexels", fake_pexels)
+
+    assert not (tmp_path / "cache").exists()
+    r = image_engine.fetch_image_for_slide("kw1", 1000000, 800000)
+    assert r == b"BYTES"
+    assert called["n"] == 1
+    assert (tmp_path / "cache").exists()
+
+
+def test_image_cache_can_be_cleared(monkeypatch, tmp_path):
+    """clear_image_cache() removes every file in the cache dir."""
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import image_engine
+    monkeypatch.setattr(image_engine, "CACHE_DIR", tmp_path / "cache")
+
+    # Populate manually
+    (tmp_path / "cache").mkdir(parents=True)
+    (tmp_path / "cache" / "abc.jpg").write_bytes(b"x")
+    (tmp_path / "cache" / "abc.json").write_text("{}")
+    (tmp_path / "cache" / "def.jpg").write_bytes(b"y")
+
+    removed = image_engine.clear_image_cache()
+    assert removed == 3
+    assert list((tmp_path / "cache").iterdir()) == []
 
 
 def test_summarize_report(capsys, tmp_path):

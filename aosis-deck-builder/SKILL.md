@@ -150,8 +150,16 @@ closing_diagonal) automatically clip the inserted photo to the design's
 diagonal cut — the photo is no longer a rectangle covering the diagonal,
 it's shaped to match the layout's `custGeom`.
 
-Disable with the `--no-images` CLI flag (e.g. for offline builds or
-faster regeneration). Failure is silent — the slide just renders without
+**Disk cache (Chantier 22):** Pexels downloads are cached under
+`~/.cache/aosis-deck-builder/pexels/`, keyed by SHA-256 of
+`(keyword, orientation, dimensions)`. Each `.jpg` has a companion
+`.json` with provenance (photo id, photographer, URL, timestamp).
+Regenerating a deck with the same images is ~40 % faster and consumes
+zero Pexels quota. Bypass with `--no-cache-images`, wipe with
+`--clear-image-cache`.
+
+Disable image fetching entirely with the `--no-images` CLI flag (e.g.
+for offline builds). Failure is silent — the slide just renders without
 a photo. See [`references/json-schema.md`](references/json-schema.md#images-automatiques-pexels--lorem-picsum)
 for the full mechanism.
 

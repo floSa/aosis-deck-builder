@@ -1547,14 +1547,36 @@ def _paginate_slide(slide_spec, max_per_page):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="Build an AOSIS-branded .pptx from a JSON spec.")
-    p.add_argument("spec")
-    p.add_argument("output")
+    p.add_argument("spec", nargs="?")
+    p.add_argument("output", nargs="?")
     p.add_argument("--template", default=None)
     p.add_argument("--debug-layouts", action="store_true",
                    help="Stamp a tiny grey footer on each slide showing its layout name.")
     p.add_argument("--no-images", action="store_true",
                    help="Skip auto-fetching stock photos for {{IMAGE}} placeholders.")
+    p.add_argument("--no-cache-images", action="store_true",
+                   help="Bypass the local Pexels image cache and fetch fresh.")
+    p.add_argument("--clear-image-cache", action="store_true",
+                   help="Wipe the local image cache and exit (no deck built).")
     args = p.parse_args(argv)
+
+    # Chantier 22 — utility action: clear cache and exit
+    if args.clear_image_cache:
+        sys.path.insert(0, str(Path(__file__).parent))
+        from image_engine import clear_image_cache, CACHE_DIR
+        n = clear_image_cache()
+        print(f"OK — cleared {n} files from {CACHE_DIR}")
+        return 0
+
+    # Chantier 22 — apply --no-cache-images before fetch
+    if args.no_cache_images:
+        sys.path.insert(0, str(Path(__file__).parent))
+        from image_engine import set_cache_enabled
+        set_cache_enabled(False)
+
+    if not args.spec or not args.output:
+        p.error("spec and output are required unless using --clear-image-cache")
+
     with open(args.spec, encoding="utf-8") as f:
         spec = json.load(f)
     out = build_deck(spec, args.output, template_path=args.template,
