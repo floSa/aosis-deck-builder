@@ -184,11 +184,8 @@ The example below illustrates 12 different layouts in a single coherent deck —
 ### `big_idea`
 `idea` (the bold statement — 1-3 sentences max), optional `title` (eyebrow tag at the top — render it in UPPERCASE for an editorial feel), optional `attribution` (small tag in orange uppercase under the idea), optional `supports` (list of strings, or list of `{title, detail}` for richer entries — max 5).
 
-### `matrix_2x2`
-`x_axis` and `y_axis`, each `{label, low, high}`. `quadrants` is `{top_left, top_right, bottom_left, bottom_right}`, each with `title` and `items` list. Convention : the top-right quadrant is the "star" — put the strategic priority there. Cap at 4 items per quadrant.
-
-### `swot`
-`strengths`, `weaknesses`, `opportunities`, `threats`, each `{title, items}`. Cap at **3 items per quadrant** — the cells are not as roomy as `matrix_2x2`. Use this only for classic SWOT; for anything else, use `matrix_2x2`.
+### ~~`matrix_2x2`~~ / ~~`swot`~~ — retirés au Chantier 23
+⛔ Utilise [`matrix_2x2_styled`](#matrix_2x2_styled) (template-based) à la place.
 
 ### `pyramid`
 `levels` list, 2-5 entries, listed **bottom-to-top** by default (base first, apex last). Set `inverted: true` to flip when the narrative is top-down. The apex (or base, if inverted) is highlighted in orange. Each level : `name` (rendered inside) and optional `detail` (rendered to the right).
@@ -199,8 +196,8 @@ Two levels max. `leader` = `{name, role}`. `reports` is a list of up to 5 entrie
 ### `funnel`
 `stages` list, 3 to 6 entries. Each : `name`, optional `value` (rendered to the right of the funnel in big type), optional `detail` (small gray text under the value). The last stage is highlighted in orange to suggest the "conversion".
 
-### `roadmap`
-`milestones` list, 2 to 6 entries. Each : `date` (short — `"Juin '26"`, `"Q3 2026"`), `name` (the milestone label), optional `detail` (one-line explanation). Labels alternate above/below the line to avoid collisions.
+### ~~`roadmap`~~ — retiré au Chantier 23
+⛔ Utilise [`roadmap_styled`](#roadmap_styled) (template-based) à la place.
 
 ### `stat_grid`
 1 to 4 stats. Each : `value`, `label`, optional `accent: "orange"|"navy"`. Optional `footnote`. Keep `value` ≤ 6 chars.
@@ -208,23 +205,8 @@ Two levels max. `leader` = `{name, role}`. `reports` is a list of up to 5 entrie
 ### `dashboard`
 Editorial mix of stats and a chart. `stats` is a list of up to 4 entries (`{value, label}` — restrained styling, no big colored boxes). `chart` is the same as the standalone `chart` layout's spec; `chart_title` is an optional small label rendered above the chart in uppercase. Either `stats` or `chart` can be omitted.
 
-### `agenda`
-Numbered list, up to 6 items. Each : `title` (the agenda heading) and optional `detail` (rendered in orange on the right of the same row — typically a timing or duration). Use as a deck's second slide to set expectations.
-
-### `timeline`
-`phases`, 2-6. Each : `name`, `duration`, optional `detail` rendered under the box.
-
-### `cards`
-List `cards`, each `{title, body, badge?}`. Optional top-level `columns` (2/3/4). Cap at 6-8 cards.
-
-### `comparison`
-`left`/`right`, each `{title, subtitle?, items}`. 4-5 items per side is the sweet spot.
-
-### `chart`
-`chart` object with `type` (`bar`, `barh`, `line`, `pie`), `labels`, `data` (single series) or `series` (multi-series). Optional `ylabel`, `xlabel`, `highlight` (`"max"` / `"min"` / int index). Top-level `commentary` (list of bullets) places bullets next to the chart instead of letting it fill the slide.
-
-### `quote`
-`text` (required), `author` (optional, rendered in orange uppercase). One idea per slide.
+### ~~`agenda`~~ / ~~`timeline`~~ / ~~`cards`~~ / ~~`comparison`~~ / ~~`chart`~~ / ~~`quote`~~ — retirés au Chantier 23
+⛔ Remplaçants template-based : `agenda` → [`agenda_diagonal`](#agenda_diagonal) · `timeline` → [`roadmap_styled`](#roadmap_styled) · `cards` → [`framework_3cards`](#framework_3cards) · `comparison` → [`comparison_2cols`](#comparison_2cols) · `chart` → [`kpi_with_chart`](#kpi_with_chart) · `quote` → [`quote_callout`](#quote_callout).
 
 ### `image_hero`
 `image` (absolute path), optional `title` / `subtitle` shown on a navy band at the bottom.
@@ -241,8 +223,8 @@ No fields. The closing slide is appended automatically at the end of the deck. T
 ### `content`
 `title` (string), `bullets` (same shape as `text`), `image` (absolute path to a screenshot/photo shown next to the bullets).
 
-### `process`
-`title` (string), `steps` (list of step objects). Each step is rendered as a numbered orange circle with title and optional detail in a vertical sequence.
+### ~~`process`~~ — retiré au Chantier 23
+⛔ Utilise [`process_steps`](#process_steps) (template-based) à la place.
 
 ---
 

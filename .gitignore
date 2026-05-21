@@ -15,6 +15,9 @@ venv/
 # WSL / Windows artifacts
 *:Zone.Identifier
 
+# MS Office lock files (created when a doc is open)
+~$*
+
 # Editor / OS
 .DS_Store
 .vscode/
