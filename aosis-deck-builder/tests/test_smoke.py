@@ -1958,9 +1958,8 @@ def test_kpi_value_xxl_default(tmp_path):
     value_sp = _named_descendant(grp._element, '{{KPI_VALUE}}')
     rPr = value_sp.find('.//' + qn('a:rPr'))
     sz = int(rPr.get('sz'))
-    # "87%" is 3 chars and the kpi_with_chart shape is only 0.47" tall.
-    # Chantier 19 height-aware sizing caps at 30pt. Still bigger than the
-    # pre-Chantier 18 baseline of 28pt.
+    # Chantier 21 — kpi_with_chart shape is now 2.90" wide × 0.48" tall
+    # (vertical layout). Height caps "87%" at 30pt (0.48" × 72 = 34.6 → snap 30).
     assert sz >= 3000, f"short KPI value should be ≥ 30pt (XXL), got sz={sz}"
 
 
@@ -2200,14 +2199,85 @@ def test_kpi_with_chart_value_fits_width(tmp_path):
                     sizes.append(int(sz) / 100.0)
                     break
     assert sizes, "no {{KPI_VALUE}} found"
-    # Shape is 1.00" wide ; "5.9 M€" = 6 chars × 0.55 × font_pt
-    # must be ≤ 1.00" × 72 pt/" = 72pt → font_pt ≤ 72 / (6 × 0.55) ≈ 21.8pt
+    # Chantier 21 — shape is now 2.90" wide (vertical layout, full card width).
+    # "5.9 M€" = 6 chars × 0.55 × font_pt must fit ≤ 2.90" × 72 pt/" = 208.8pt
+    # → font_pt ≤ 208.8 / (6 × 0.55) ≈ 63.3pt. Plenty of room.
     for sz_pt in sizes:
         est_width_pt = 6 * 0.55 * sz_pt
-        shape_width_pt = 1.00 * 72  # shape width in pt
+        shape_width_pt = 2.90 * 72  # shape width in pt (full card after C21)
         assert est_width_pt <= shape_width_pt * 1.05, (
             f"value at {sz_pt}pt has est width {est_width_pt:.1f}pt > "
             f"shape width {shape_width_pt}pt → would wrap"
+        )
+
+
+# =============================================================================
+# Chantier 21 — kpi_with_chart vertical disposition (value top, label bottom)
+# =============================================================================
+def test_kpi_vertical_layout(tmp_path):
+    """C21 — in kpi_with_chart, each KPI card has the VALUE shape placed
+    above the LABEL shape (vertical disposition, no horizontal side-by-side).
+    Verifies: value.top + value.height <= label.top, and shapes share width."""
+    from pptx.oxml.ns import qn
+    spec = {
+        "slides": [{
+            "layout": "kpi_with_chart",
+            "title": "Vertical layout test",
+            "kpis": [
+                {"label": "Alpha",  "value": "42"},
+                {"label": "Beta",   "value": "85%"},
+                {"label": "Gamma",  "value": "1.2 M€"},
+            ],
+            "chart": {"type": "bar", "labels": ["A", "B"], "values": [1, 2]},
+        }],
+        "closing": False,
+    }
+    out = tmp_path / "vertical.pptx"
+    build_deck(spec, out, template_path=TEMPLATE, auto_images=False)
+    slide = _find_slide_by_cSld_name(Presentation(str(out)), "kpi_with_chart")
+
+    pairs = []  # list of (value_sp, label_sp) per REPEAT_ITEM copy
+    for sh in slide.shapes:
+        if sh.shape_type != 6:  # only GROUPs
+            continue
+        value_sp = None
+        label_sp = None
+        for sp in sh._element.iter(qn('p:sp')):
+            cNvPr = sp.find('.//' + qn('p:cNvPr'))
+            if cNvPr is None:
+                continue
+            n = cNvPr.get('name', '')
+            if n == '{{KPI_VALUE}}':
+                value_sp = sp
+            elif n == '{{KPI_LABEL}}':
+                label_sp = sp
+        if value_sp is not None and label_sp is not None:
+            pairs.append((value_sp, label_sp))
+
+    assert len(pairs) == 3, f"expected 3 KPI pairs, got {len(pairs)}"
+
+    def xfrm(sp):
+        spPr = sp.find(qn('p:spPr'))
+        xfrm_el = spPr.find(qn('a:xfrm'))
+        off = xfrm_el.find(qn('a:off'))
+        ext = xfrm_el.find(qn('a:ext'))
+        return (int(off.get('x')), int(off.get('y')),
+                int(ext.get('cx')), int(ext.get('cy')))
+
+    for i, (v_sp, l_sp) in enumerate(pairs):
+        vx, vy, vw, vh = xfrm(v_sp)
+        lx, ly, lw, lh = xfrm(l_sp)
+        # Vertical: value above label, no overlap
+        assert vy + vh <= ly, (
+            f"KPI #{i+1}: value bottom ({vy+vh}) overlaps label top ({ly})"
+        )
+        # Same width (vertical stack alignment)
+        assert vw == lw, (
+            f"KPI #{i+1}: value width {vw} != label width {lw}"
+        )
+        # Both at same left (centered same column)
+        assert vx == lx, (
+            f"KPI #{i+1}: value x {vx} != label x {lx}"
         )
 
 
