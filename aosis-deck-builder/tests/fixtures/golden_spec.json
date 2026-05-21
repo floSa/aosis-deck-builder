@@ -10,10 +10,10 @@
       "supporting": ["BCBS 239 conforme par construction", "Lineage bout-en-bout traçable"]
     },
     {
-      "layout": "matrix_2x2",
+      "layout": "matrix_2x2_styled",
       "title": "Cartographie des chantiers identifiés",
-      "x_axis": {"label": "Effort", "low": "Faible", "high": "Élevé"},
-      "y_axis": {"label": "Impact", "low": "Faible", "high": "Élevé"},
+      "x_axis": {"label": "Effort"},
+      "y_axis": {"label": "Impact"},
       "quadrants": {
         "top_left":     {"title": "Quick wins",             "items": ["Refactor batchs"]},
         "top_right":    {"title": "Chantiers stratégiques", "items": ["Refonte lineage", "Migration moteur"]},
@@ -22,14 +22,14 @@
       }
     },
     {
-      "layout": "roadmap",
+      "layout": "roadmap_styled",
       "title": "Le chemin sur 12 mois",
-      "milestones": [
-        {"date": "Juin '26", "name": "Audit",         "detail": "Cartographie + quick wins"},
-        {"date": "Août '26", "name": "Conception",    "detail": "Architecture cible"},
-        {"date": "Nov '26",  "name": "First release", "detail": "Premier lot en production"},
-        {"date": "Mars '27", "name": "Build complet", "detail": "Modules livrés"},
-        {"date": "Juin '27", "name": "Bascule",       "detail": "Plateforme historique éteinte"}
+      "items": [
+        {"date": "Juin '26", "milestone": "Audit"},
+        {"date": "Août '26", "milestone": "Conception"},
+        {"date": "Nov '26",  "milestone": "First release"},
+        {"date": "Mars '27", "milestone": "Build complet"},
+        {"date": "Juin '27", "milestone": "Bascule"}
       ]
     }
   ],

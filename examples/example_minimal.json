@@ -11,12 +11,12 @@
       "label":  "Le temps de production que nous allons reprendre"
     },
     {
-      "layout": "roadmap",
+      "layout": "roadmap_styled",
       "title":  "Le chemin sur 12 mois",
-      "milestones": [
-        {"date": "Juin '26", "name": "Audit",         "detail": "Cartographie de l'existant"},
-        {"date": "Nov '26",  "name": "First release", "detail": "Premier lot livré"},
-        {"date": "Juin '27", "name": "Bascule",       "detail": "Plateforme cible en service"}
+      "items": [
+        {"date": "Juin '26", "milestone": "Audit"},
+        {"date": "Nov '26",  "milestone": "First release"},
+        {"date": "Juin '27", "milestone": "Bascule"}
       ]
     },
     {

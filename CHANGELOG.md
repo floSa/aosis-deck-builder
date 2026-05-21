@@ -4,6 +4,21 @@ Toutes les modifications notables du skill `aosis-deck-builder` sont documentée
 
 ## [Unreleased]
 
+### Removed
+- **10 layouts code-based dépréciés retirés du DISPATCH** (Chantier 23, 2026-05-21). Le Chantier 13 avait identifié 10 layouts code-based dont l'équivalent template-based est systématiquement de meilleure qualité. Retirés du `DISPATCH` dict dans `build_deck.py` : `swot`, `cards`, `process`, `chart`, `agenda`, `timeline`, `quote`, `comparison`, `matrix_2x2`, `roadmap`. Tenter d'utiliser un de ces 10 layouts dans un JSON spec lève désormais une `ValueError` explicite qui nomme le remplaçant template-based (par ex. `"Layout 'swot' is deprecated and no longer available. Use 'matrix_2x2_styled' instead. See references/layouts.md for details."`). Mapping géré par un nouveau dict `DEPRECATED_LAYOUTS` à côté du `DISPATCH`. Les 10 fonctions `add_swot`, `add_cards`, etc. **restent dans le code** pour rétro-compatibilité Git (annotées `# DEPRECATED — retiré du DISPATCH au Chantier 23. Utilise '<remplaçant>' (template-based) à la place. Voir references/layouts.md.`). 11 layouts code-based légitimes conservés : `cover`, `section`, `closing`, `text`, `content`, `stat_grid`, `image_hero`, `hero_stat`, `big_idea`, `funnel`, `pyramid`, `org_chart`, `dashboard`.
+
+  **Migrations associées** :
+  - `tests/fixtures/golden_spec.json` : `matrix_2x2` → `matrix_2x2_styled`, `roadmap` → `roadmap_styled`
+  - `tests/fixtures/roadmap_3..6.json` (4 fixtures) : `roadmap` → `roadmap_styled`
+  - `tests/fixtures/all_layouts.json` : 10 layouts dépréciés retirés (21 → 11 slides)
+  - `examples/example_minimal.json` : `roadmap` → `roadmap_styled`
+  - `examples/example_full.json` : 6 layouts migrés vers leurs équivalents template-based (`matrix_2x2_styled`, `comparison_2cols`, `roadmap_styled`, `process_steps`, `quote_callout`, `framework_3cards`)
+  - `references/layouts.md` : bannière `⛔ Retiré du DISPATCH au Chantier 23` sur les 4 sections existantes (`swot`, `cards`, `chart`, `process`) + paragraphe final remplacé par un tableau récapitulatif des 10 dépréciations
+  - `references/json-schema.md` : 10 sections dépréciées remplacées par des notes courtes pointant vers le remplaçant
+  - `SKILL.md` : 3 références à d'anciens noms (`matrix_2x2`, `roadmap`, `chart`, `quote`) remplacées par leurs équivalents `_styled`/`_diagonal`/`_2cols`/`_callout`. Quick-example migré. Compteur "code-based 23 → 13" mis à jour.
+  
+  Backup `build_deck.before-chantier23.py`. **90 passed, 1 skipped** (+10 nouveaux tests paramétrés `test_deprecated_layouts_raise_clear_error` : 1 cas par layout retiré, vérifient que l'erreur cite à la fois le nom déprécié, le remplaçant et le mot "deprecated"). 1 test existant adapté (`test_all_layouts_generate` : seuil ≥ 20 slides → ≥ 11 slides).
+
 ### Added
 - **Cache disque pour les images Pexels** (Chantier 22, 2026-05-21). Régénérer un deck re-téléchargeait toutes ses images à chaque fois (~2s pour 5 images, consommation du quota gratuit 200 req/h). Nouveau cache local sous `~/.cache/aosis-deck-builder/pexels/`, indexé par hash SHA-256 de `(keyword, orientation, target_dimensions)`. Chaque `<hash[:12]>.jpg` a un compagnon `<hash[:12]>.json` avec provenance (photo id Pexels, URL, photographer, src_url, target_px, downloaded_at ISO 8601 UTC). Pas d'expiration auto (V1) — utilisateur peut vider avec `--clear-image-cache` ou `rm -rf ~/.cache/aosis-deck-builder/`. Logs explicites en stderr (`image cache HIT/MISS`). Nouveaux flags CLI sur `build_deck.py` :
   - `--no-cache-images` : bypass le cache, force fetch direct (debug/refresh)

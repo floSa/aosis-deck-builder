@@ -126,13 +126,14 @@ def test_roadmap_no_overflow(fixture, tmp_path):
 # -----------------------------------------------------------------------------
 
 def test_all_layouts_generate(tmp_path):
-    """The `all_layouts` fixture exercises every dispatcher layout."""
+    """The `all_layouts` fixture exercises every NON-deprecated code-based
+    dispatcher layout. Post-Chantier 23: 11 code-based layouts remain
+    (10 deprecated layouts removed in C23 — see references/layouts.md)."""
     out = _generate("all_layouts.json", tmp_path)
     assert out.exists()
     prs = Presentation(str(out))
-    # cover + 20 content slides (section..image_hero) + closing = 22 minimum
-    # exact value depends on fixture count; current fixture has 20 content slides
-    assert len(prs.slides) >= 20, f"only {len(prs.slides)} slides generated"
+    # cover + 11 content slides + closing = 13
+    assert len(prs.slides) >= 11, f"only {len(prs.slides)} slides generated"
 
 
 # -----------------------------------------------------------------------------
@@ -2370,6 +2371,43 @@ def test_image_cache_can_be_cleared(monkeypatch, tmp_path):
     removed = image_engine.clear_image_cache()
     assert removed == 3
     assert list((tmp_path / "cache").iterdir()) == []
+
+
+# =============================================================================
+# Chantier 23 — Deprecated code-based layouts raise clear errors
+# =============================================================================
+@pytest.mark.parametrize("layout,replacement", [
+    ("swot",       "matrix_2x2_styled"),
+    ("cards",      "framework_3cards"),
+    ("process",    "process_steps"),
+    ("chart",      "kpi_with_chart"),
+    ("agenda",     "agenda_diagonal"),
+    ("timeline",   "roadmap_styled"),
+    ("quote",      "quote_callout"),
+    ("comparison", "comparison_2cols"),
+    ("matrix_2x2", "matrix_2x2_styled"),
+    ("roadmap",    "roadmap_styled"),
+])
+def test_deprecated_layouts_raise_clear_error(tmp_path, layout, replacement):
+    """C23 — using a deprecated layout name must raise ValueError that
+    names both the deprecated layout AND its template-based replacement."""
+    spec = {
+        "slides": [{"layout": layout, "title": "Should fail"}],
+        "closing": False,
+    }
+    out = tmp_path / "deprecated.pptx"
+    with pytest.raises(ValueError) as exc_info:
+        build_deck(spec, out, template_path=TEMPLATE, auto_images=False)
+    msg = str(exc_info.value)
+    assert layout in msg, (
+        f"error must mention the deprecated layout {layout!r}, got: {msg}"
+    )
+    assert replacement in msg, (
+        f"error must mention the replacement {replacement!r}, got: {msg}"
+    )
+    assert "deprecated" in msg.lower(), (
+        f"error must say 'deprecated', got: {msg}"
+    )
 
 
 def test_summarize_report(capsys, tmp_path):

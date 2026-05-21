@@ -392,6 +392,9 @@ def add_stat_grid(prs, title, stats, footnote=None):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'framework_3cards' (template-based) à la place.
+# Voir references/layouts.md.
 def add_cards(prs, title, cards, columns=None):
     """Grid of cards. cards = [{"title": "...", "body": "...", "badge": "01"}]"""
     slide = _blank_canvas(prs, title)
@@ -435,6 +438,9 @@ def add_cards(prs, title, cards, columns=None):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'comparison_2cols' (template-based) à la place.
+# Voir references/layouts.md.
 def add_comparison(prs, title, left, right):
     """Two columns. left/right = {"title": "...", "subtitle": "...", "items": [...]}"""
     slide = _blank_canvas(prs, title)
@@ -478,6 +484,9 @@ def add_comparison(prs, title, left, right):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'roadmap_styled' (template-based) à la place.
+# Voir references/layouts.md.
 def add_timeline(prs, title, phases):
     """Horizontal phase boxes. phases = [{"name": "...", "duration": "...", "detail": "..."}]"""
     slide = _blank_canvas(prs, title)
@@ -512,6 +521,9 @@ def add_timeline(prs, title, phases):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'process_steps' (template-based) à la place.
+# Voir references/layouts.md.
 def add_process(prs, title, steps):
     """Vertical numbered process. steps = [{"title": "...", "detail": "..."}]"""
     slide = _blank_canvas(prs, title)
@@ -546,6 +558,9 @@ def add_process(prs, title, steps):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'quote_callout' (template-based) à la place.
+# Voir references/layouts.md.
 def add_quote(prs, text, author=None):
     """Editorial pull-quote slide: huge typography, orange side bar."""
     slide = prs.slides.add_slide(_resolve_layout(prs, "text"))
@@ -702,6 +717,9 @@ def add_big_idea(prs, idea, title=None, supports=None, attribution=None):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'matrix_2x2_styled' (template-based) à la place.
+# Voir references/layouts.md.
 def add_matrix_2x2(prs, title, x_axis, y_axis, quadrants):
     """Strategic 2×2 matrix (BCG-style). Two axes, four quadrants.
     x_axis / y_axis = {"label": "Impact", "low": "Faible", "high": "Élevé"}
@@ -820,6 +838,9 @@ def add_funnel(prs, title, stages):
 # (label_w 1.9 + Inches(0.4) de débord lat.). Pour qu'elle reste dans [0, 10"],
 # il faut marker_x ∈ [1.15", 8.85"]. On prend [1.2", 8.8"] (0.05" de cushion).
 # La symétrie centre/centre des labels est préservée — pas de clamp asymétrique.
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'roadmap_styled' (template-based) à la place.
+# Voir references/layouts.md.
 def add_roadmap(prs, title, milestones):
     """Horizontal timeline with diamond milestone markers.
     milestones = [{"date": "Jun '26", "name": "Audit", "detail": "..."}]
@@ -943,6 +964,9 @@ def _generate_abstract_background(output_path, mode="dots"):
     plt.close(fig)
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'matrix_2x2_styled' (template-based) à la place.
+# Voir references/layouts.md.
 def add_swot(prs, title, strengths, weaknesses, opportunities, threats):
     """SWOT analysis 2×2.
     Each parameter is a dict {"title": "...", "items": [...]}.
@@ -1140,6 +1164,9 @@ def add_org_chart(prs, title, leader, reports):
     return slide
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'agenda_diagonal' (template-based) à la place.
+# Voir references/layouts.md.
 def add_agenda(prs, title, items):
     """Numbered table-of-contents / agenda layout.
     items = [{"title": "...", "detail": "..."}]. Up to 6 items.
@@ -1348,6 +1375,9 @@ def _render_chart_png(chart_spec, output_path):
     plt.close(fig)
 
 
+# DEPRECATED — retiré du DISPATCH au Chantier 23. Conservé pour rétro-
+# compatibilité Git. Utilise 'kpi_with_chart' (template-based) à la place.
+# Voir references/layouts.md.
 def add_chart_slide(prs, title, chart_spec, commentary=None):
     """Generate a chart from data. If commentary present → side-by-side bullets+chart."""
     tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
@@ -1379,18 +1409,8 @@ DISPATCH = {
                                                    s.get("bullets"), s.get("image")),
     "stat_grid":  lambda prs, s: add_stat_grid(prs, s.get("title", ""),
                                                s.get("stats", []), s.get("footnote")),
-    "cards":      lambda prs, s: add_cards(prs, s.get("title", ""),
-                                           s.get("cards", []), s.get("columns")),
-    "comparison": lambda prs, s: add_comparison(prs, s.get("title", ""),
-                                                s.get("left", {}), s.get("right", {})),
-    "timeline":   lambda prs, s: add_timeline(prs, s.get("title", ""), s.get("phases", [])),
-    "process":    lambda prs, s: add_process(prs, s.get("title", ""), s.get("steps", [])),
-    "quote":      lambda prs, s: add_quote(prs, s.get("text", ""), s.get("author")),
     "image_hero": lambda prs, s: add_image_hero(prs, s.get("image"),
                                                 s.get("title"), s.get("subtitle")),
-    "chart":      lambda prs, s: add_chart_slide(prs, s.get("title", ""),
-                                                 s.get("chart", {}),
-                                                 s.get("commentary")),
     # Inspirational layouts
     "hero_stat":  lambda prs, s: add_hero_stat(prs, s.get("title", ""),
                                                s.get("value", ""), s.get("label", ""),
@@ -1398,29 +1418,36 @@ DISPATCH = {
     "big_idea":   lambda prs, s: add_big_idea(prs, s.get("idea", ""),
                                               s.get("title"), s.get("supports"),
                                               s.get("attribution")),
-    "matrix_2x2": lambda prs, s: add_matrix_2x2(prs, s.get("title", ""),
-                                                s.get("x_axis", {}), s.get("y_axis", {}),
-                                                s.get("quadrants", {})),
     "funnel":     lambda prs, s: add_funnel(prs, s.get("title", ""), s.get("stages", [])),
-    "roadmap":    lambda prs, s: add_roadmap(prs, s.get("title", ""),
-                                             s.get("milestones", [])),
-    "swot":       lambda prs, s: add_swot(prs, s.get("title", ""),
-                                          s.get("strengths", {}),
-                                          s.get("weaknesses", {}),
-                                          s.get("opportunities", {}),
-                                          s.get("threats", {})),
     "pyramid":    lambda prs, s: add_pyramid(prs, s.get("title", ""),
                                              s.get("levels", []),
                                              s.get("inverted", False)),
     "org_chart":  lambda prs, s: add_org_chart(prs, s.get("title", ""),
                                                s.get("leader", {}),
                                                s.get("reports", [])),
-    "agenda":     lambda prs, s: add_agenda(prs, s.get("title", ""),
-                                            s.get("items", [])),
     "dashboard":  lambda prs, s: add_dashboard(prs, s.get("title", ""),
                                                s.get("stats"),
                                                s.get("chart"),
                                                s.get("chart_title")),
+}
+
+
+# Chantier 23 — layouts retirés du DISPATCH au profit de leurs équivalents
+# template-based, de bien meilleure qualité visuelle. Les fonctions
+# `add_swot`, `add_cards`, etc. sont conservées dans le module pour
+# permettre une réactivation rapide via Git revert si besoin, mais elles
+# ne sont plus exposées au pipeline.
+DEPRECATED_LAYOUTS = {
+    "swot":       "matrix_2x2_styled",
+    "cards":      "framework_3cards",
+    "process":    "process_steps",
+    "chart":      "kpi_with_chart",
+    "agenda":     "agenda_diagonal",
+    "timeline":   "roadmap_styled",
+    "quote":      "quote_callout",
+    "comparison": "comparison_2cols",
+    "matrix_2x2": "matrix_2x2_styled",
+    "roadmap":    "roadmap_styled",
 }
 
 
@@ -1511,6 +1538,12 @@ def build_deck(spec, output_path, template_path=None, debug_layouts=False,
                 render_template_slide(prs, template_path, layout, s)
             _stamp_new_slides(prev, layout, False)
             continue
+        if layout in DEPRECATED_LAYOUTS:
+            replacement = DEPRECATED_LAYOUTS[layout]
+            raise ValueError(
+                f"Layout '{layout}' is deprecated and no longer available. "
+                f"Use '{replacement}' instead. See references/layouts.md for details."
+            )
         if layout not in DISPATCH:
             raise ValueError(
                 f"slides[{i}].layout='{layout}' is invalid. "

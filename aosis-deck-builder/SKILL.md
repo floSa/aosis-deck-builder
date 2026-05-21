@@ -1,6 +1,6 @@
 ---
 name: aosis-deck-builder
-description: Use this skill whenever the user asks for a PowerPoint deck, presentation, slides or pptx file at AOSIS. Triggers explicitly include the words "powerpoint", "pptx", "deck", "slides", "présentation", or any request to produce a commercial proposal, mission deliverable (restitution), or CODIR report in slide form. The skill produces a .pptx file built on top of the official AOSIS template (navy/orange palette, logo, footers, layouts inherited automatically) AND composes a rich catalogue of consulting-grade visual slides — hero statistics, big-idea statements, 2×2 matrices, funnels, horizontal roadmaps, timelines, cards, comparisons, charts, processes, quotes, image-hero. Slides aim for the look of a top-tier consulting pitch deck (McKinsey / BCG / Bain). Always prefer this skill over the generic pptx skill for this user — every AOSIS deck must use this template, and a deck built without it will look unbranded and amateur.
+description: Use this skill whenever the user asks for a PowerPoint deck, presentation, slides or pptx file at AOSIS. Triggers explicitly include the words "powerpoint", "pptx", "deck", "slides", "présentation", or any request to produce a commercial proposal, mission deliverable (restitution), or CODIR report in slide form. The skill produces a .pptx file built on top of the official AOSIS template (navy/orange palette, logo, footers, layouts inherited automatically) AND composes a rich catalogue of consulting-grade visual slides — hero statistics, big-idea statements, styled 2×2 matrices, funnels, horizontal roadmaps, framework cards, comparisons, KPI+chart combos, process steps, quote callouts, data tables, image-hero. Slides aim for the look of a top-tier consulting pitch deck (McKinsey / BCG / Bain). Always prefer this skill over the generic pptx skill for this user — every AOSIS deck must use this template, and a deck built without it will look unbranded and amateur.
 ---
 
 # AOSIS Deck Builder
@@ -11,12 +11,16 @@ output. The skill always starts from the official `.pptx` template in
 inherited by construction — your job is to produce the **content**, the
 **visual composition**, and the **narrative arc**.
 
-**Two generation mechanisms coexist**: **code-based layouts** (23, drawn
-programmatically in `build_deck.py`) and **template-based layouts** (11+,
-sourced from named slides in `assets/exhibits.pptx` and filled at runtime
+**Two generation mechanisms coexist**: **code-based layouts** (13, drawn
+programmatically in `build_deck.py` — post Chantier 23 cleanup, 10 deprecated
+layouts were removed from the dispatch) and **template-based layouts** (17+,
+sourced from named slides in `assets/AOSIS_template.pptx` and filled at runtime
 by `template_engine.py`). The dispatcher routes by layout name. Template
 slides are discovered dynamically by scanning `cSld.name` — adding a new
-named slide in exhibits.pptx instantly registers it.
+named slide in the template instantly registers it. **Always prefer
+template-based layouts when one exists** — they are systematically of
+higher visual quality. See [`references/layouts.md`](references/layouts.md)
+for the full catalogue + the table of deprecated → template-based mappings.
 
 ## References
 
@@ -35,10 +39,10 @@ around the template instead of using it.
 
 **2. Always prefer a visual layout over plain text.** The default to
 reach for is *not* `text` with bullets. Open with `hero_stat` or
-`big_idea`, structure arguments with `comparison`, `matrix_2x2`, or
-`roadmap`, support data with `chart`, anchor with `quote`. Use `text` or
-`content` only when the message really is words (legal text, tarification,
-prochaines étapes).
+`big_idea`, structure arguments with `comparison_2cols`, `matrix_2x2_styled`,
+or `roadmap_styled`, support data with `kpi_with_chart`, anchor with
+`quote_callout`. Use `text` or `content` only when the message really is
+words (legal text, tarification, prochaines étapes).
 
 **3. Always write action titles, never descriptive titles.** A descriptive
 title labels the slide ("Réduction du temps"). An action title delivers the
@@ -63,10 +67,10 @@ it.
 CODIR), define the central message, sketch 6-12 slides. Verify that the
 titles read as a story when skimmed. **Vary the layouts** — a great deck
 has rhythm: open strong with `hero_stat` or `big_idea`, alternate
-frameworks (`matrix_2x2`, `funnel`, `roadmap`), support data with `chart`,
-anchor mid-deck with `quote`, close with a final `hero_stat` or
-`big_idea` that lands the ask. For the catalogue of available layouts and
-when to pick each, see [`references/layouts.md`](references/layouts.md).
+frameworks (`matrix_2x2_styled`, `funnel`, `roadmap_styled`), support data
+with `kpi_with_chart`, anchor mid-deck with `quote_callout`, close with a
+final `hero_stat` or `big_idea` that lands the ask. For the catalogue of
+available layouts and when to pick each, see [`references/layouts.md`](references/layouts.md).
 
 **2. Write the JSON spec.** Build the spec following the schema. For
 the full field-by-field reference and a complete example, see
@@ -98,10 +102,10 @@ Minimal spec to bootstrap (full schema in [`references/json-schema.md`](referenc
       "label":  "Le temps de production que nous allons reprendre"
     },
     {
-      "layout": "matrix_2x2",
+      "layout": "matrix_2x2_styled",
       "title":  "Cartographie des chantiers",
-      "x_axis": {"label": "Effort", "low": "Faible", "high": "Élevé"},
-      "y_axis": {"label": "Impact", "low": "Faible", "high": "Élevé"},
+      "x_axis": {"label": "Effort"},
+      "y_axis": {"label": "Impact"},
       "quadrants": {
         "top_left":     {"title": "Quick wins",          "items": ["Refactor batchs"]},
         "top_right":    {"title": "Chantiers stratégiques", "items": ["Refonte lineage"]},
@@ -110,12 +114,12 @@ Minimal spec to bootstrap (full schema in [`references/json-schema.md`](referenc
       }
     },
     {
-      "layout": "roadmap",
+      "layout": "roadmap_styled",
       "title":  "Le chemin sur 12 mois",
-      "milestones": [
-        {"date": "Juin '26", "name": "Audit",         "detail": "Cartographie"},
-        {"date": "Nov '26",  "name": "First release", "detail": "Premier lot"},
-        {"date": "Juin '27", "name": "Bascule",       "detail": "Plateforme cible"}
+      "items": [
+        {"date": "Juin '26", "milestone": "Audit"},
+        {"date": "Nov '26",  "milestone": "First release"},
+        {"date": "Juin '27", "milestone": "Bascule"}
       ]
     }
   ],

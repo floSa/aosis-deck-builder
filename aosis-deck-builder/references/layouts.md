@@ -641,6 +641,8 @@ Ces layouts sont dessinés programmatiquement (pas issus du template `.pptx`). R
 
 ## `swot`
 
+> ⛔ **Retiré du DISPATCH au Chantier 23.** Utilise [`matrix_2x2_styled`](#matrix-2x2-styled) (template-based) à la place. Le code de cette fonction reste dans le repo pour rétro-compatibilité Git mais n'est plus exposé au pipeline. Tenter d'utiliser `swot` dans un JSON spec lèvera maintenant une `ValueError` explicite.
+
 **Domaine** : Comparaison
 
 **Description** : Matrice SWOT classique 2×2 (Forces / Faiblesses / Opportunités / Menaces) avec 4 quadrants et bullets.
@@ -805,6 +807,8 @@ Ces layouts sont dessinés programmatiquement (pas issus du template `.pptx`). R
 
 ## `cards`
 
+> ⛔ **Retiré du DISPATCH au Chantier 23.** Utilise [`framework_3cards`](#framework-3cards) (template-based) à la place. Le code de cette fonction reste dans le repo pour rétro-compatibilité Git mais n'est plus exposé au pipeline. Tenter d'utiliser `cards` dans un JSON spec lèvera maintenant une `ValueError` explicite.
+
 **Domaine** : Liberté
 
 **Description** : Grille de cartes (2-4 colonnes) avec titre, sous-titre, body texte. Format profil ou portfolio.
@@ -832,6 +836,8 @@ Ces layouts sont dessinés programmatiquement (pas issus du template `.pptx`). R
 
 ## `chart`
 
+> ⛔ **Retiré du DISPATCH au Chantier 23.** Utilise [`kpi_with_chart`](#kpi-with-chart) (template-based) à la place. Le code de cette fonction reste dans le repo pour rétro-compatibilité Git mais n'est plus exposé au pipeline. Tenter d'utiliser `chart` dans un JSON spec lèvera maintenant une `ValueError` explicite.
+
 **Domaine** : Données chiffrées
 
 **Description** : Slide avec un chart matplotlib en pleine page, titre simple en haut, commentary optionnel à côté du chart sous forme de bullets.
@@ -858,6 +864,8 @@ Ces layouts sont dessinés programmatiquement (pas issus du template `.pptx`). R
 ```
 
 ## `process`
+
+> ⛔ **Retiré du DISPATCH au Chantier 23.** Utilise [`process_steps`](#process-steps) (template-based) à la place. Le code de cette fonction reste dans le repo pour rétro-compatibilité Git mais n'est plus exposé au pipeline. Tenter d'utiliser `process` dans un JSON spec lèvera maintenant une `ValueError` explicite.
 
 **Domaine** : Process
 
@@ -981,6 +989,21 @@ Ces layouts sont dessinés programmatiquement (pas issus du template `.pptx`). R
 
 ---
 
-# Layouts hérités (dispatch direct)
+# Layouts retirés au Chantier 23
 
-Le DISPATCH expose aussi `cover`, `section`, `closing`, `comparison`, `timeline`, `quote`, `agenda`, `matrix_2x2`, `roadmap`, `stat_grid` (code-based versions). Ces noms **routent automatiquement vers leur équivalent template-based** quand celui-ci existe (`cover`, `closing` → template, …). En pratique, utiliser directement le nom template-based dans le JSON spec pour la clarté.
+Les 10 layouts code-based suivants ont été **retirés du DISPATCH** car leur équivalent template-based est systématiquement de meilleure qualité visuelle. Toute tentative d'utilisation dans un JSON spec lève désormais une `ValueError` explicite qui pointe vers le remplaçant.
+
+| Layout retiré | Remplacement template-based |
+|---|---|
+| `swot` | `matrix_2x2_styled` |
+| `cards` | `framework_3cards` |
+| `process` | `process_steps` |
+| `chart` | `kpi_with_chart` |
+| `agenda` | `agenda_diagonal` |
+| `timeline` | `roadmap_styled` |
+| `quote` | `quote_callout` |
+| `comparison` | `comparison_2cols` |
+| `matrix_2x2` | `matrix_2x2_styled` |
+| `roadmap` | `roadmap_styled` |
+
+Le code des 10 fonctions (`add_swot`, `add_cards`, etc.) reste dans `scripts/build_deck.py` annoté `# DEPRECATED — retiré du DISPATCH au Chantier 23` pour permettre une réactivation rapide via Git revert si nécessaire.
