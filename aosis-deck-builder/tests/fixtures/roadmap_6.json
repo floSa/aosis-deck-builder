@@ -1,0 +1,16 @@
+{
+  "cover": {"title": "Test roadmap 6 milestones", "ref": "Test"},
+  "slides": [{
+    "layout": "roadmap",
+    "title": "Test 6 milestones",
+    "milestones": [
+      {"date": "Juin '26", "name": "Kickoff",        "detail": "Lancement et cadrage"},
+      {"date": "Août '26", "name": "Audit",          "detail": "Cartographie + quick wins"},
+      {"date": "Oct '26",  "name": "Conception",     "detail": "Architecture cible validée"},
+      {"date": "Janv '27", "name": "First release",  "detail": "Premier lot en production"},
+      {"date": "Avril '27","name": "Build complet",  "detail": "Modules livrés"},
+      {"date": "Juin '27", "name": "Bascule",        "detail": "Plateforme historique éteinte"}
+    ]
+  }],
+  "closing": true
+}

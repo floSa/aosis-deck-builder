@@ -1,0 +1,67 @@
+{
+  "slides": [
+    {
+      "layout": "data_table",
+      "title": "Comparaison des 3 stratégies de migration cloud",
+      "source": "Analyse AOSIS — 30 missions 2022-2025",
+      "table": {
+        "headers": ["Stratégie", "Durée", "Coût", "Gain TCO", "Risque"],
+        "rows": [
+          ["Lift & Shift", "12-18 mois", "€",   "-8 à -15 %",  "Faible"],
+          ["Replatform",   "18-24 mois", "€€",  "-20 à -30 %", "Modéré"],
+          ["Refactor",     "30-48 mois", "€€€", "-35 à -50 %", "Élevé"]
+        ],
+        "highlight_column": 3,
+        "highlight_row": 1
+      }
+    },
+    {
+      "layout": "data_table",
+      "title": "Cartographie des risques majeurs et leur mitigation",
+      "source": "Synthèse AOSIS — 30 missions",
+      "table": {
+        "headers": ["Risque", "Probabilité", "Impact", "Mitigation"],
+        "rows": [
+          ["Dépassement budgétaire",   "Élevée",  "Élevé",      "FinOps dès la Phase 0"],
+          ["Dépendance fournisseur",   "Moyenne", "Élevé",      "IaC portable, multi-cloud"],
+          ["Compétences insuffisantes","Élevée",  "Moyen",      "Formation, recrutement"],
+          ["Migration de données",     "Moyenne", "Élevé",      "POC, fenêtres planifiées"],
+          ["Conformité réglementaire", "Faible",  "Très élevé", "Audit RGPD, région UE"],
+          ["Continuité de service",    "Faible",  "Très élevé", "Bascule par vagues, rollback"]
+        ],
+        "highlight_row": 0
+      }
+    },
+    {
+      "layout": "data_table",
+      "title": "Roadmap d'exécution TechnoLog sur 22 mois",
+      "source": "Plan d'exécution AOSIS",
+      "table": {
+        "headers": ["Phase", "Période", "Durée", "Livrables clés"],
+        "rows": [
+          ["Phase 0 — Cadrage",       "M1-2",   "2 mois", "Landing Zone, gouvernance, FinOps"],
+          ["Phase 1 — Quick wins",    "M3-6",   "4 mois", "10-15 apps non-critiques"],
+          ["Phase 2 — Apps support",  "M7-12",  "6 mois", "15-20 applications support"],
+          ["Phase 3 — Apps critiques","M13-18", "6 mois", "ERP, CRM, apps métier"],
+          ["Phase 4 — Optimisation",  "M19-24", "6 mois", "FinOps avancé, décom DC"]
+        ],
+        "highlight_column": 3
+      }
+    },
+    {
+      "layout": "data_table",
+      "title": "KPI avant / après migration (test centrage)",
+      "source": "Étude de cas TechnoLog",
+      "table": {
+        "headers": ["KPI", "Avant", "Après"],
+        "rows": [
+          ["Disponibilité ERP",  "96,4 %",   "99,8 %"],
+          ["TCO infrastructure", "4,2 M€/an","3,1 M€/an"],
+          ["Provisionnement",    "23 jours", "2 heures"],
+          ["Effort maintenance", "62 % DSI", "38 % DSI"]
+        ]
+      }
+    }
+  ],
+  "closing": false
+}

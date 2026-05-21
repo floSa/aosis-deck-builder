@@ -1,0 +1,72 @@
+{
+  "slides": [
+    {
+      "layout": "executive_summary",
+      "eyebrow": "EXECUTIVE SUMMARY",
+      "title": "Three convictions that frame our DWH migration proposal",
+      "takeaway": "Decouple storage and compute, refactor models, industrialise delivery",
+      "source": "Source: AOSIS analysis, May 2026",
+      "items": [
+        {"eyebrow": "PILLAR 1", "title": "Decouple storage from compute", "bullets": "• Stop paying for the peak\n• Auto-scale on demand"},
+        {"eyebrow": "PILLAR 2", "title": "Refactor fragile data models",  "bullets": "• Top 5 critical models\n• CDC pipelines"},
+        {"eyebrow": "PILLAR 3", "title": "Industrialise delivery",        "bullets": "• CI/CD on data\n• Observability"}
+      ]
+    },
+    {
+      "layout": "hero_stat",
+      "title": "L'AMBITION",
+      "value": "-75%",
+      "label": "Time of data production we will reclaim",
+      "context": "From 8h to 2h per cycle in 12 months"
+    },
+    {
+      "layout": "process_steps",
+      "eyebrow": "PROCESS",
+      "title": "Four steps to deliver the target state",
+      "source": "Source: AOSIS methodology",
+      "items": [
+        {"title": "Audit",  "text": "Map the current state and dependencies"},
+        {"title": "Design", "text": "Define target architecture and quick wins"},
+        {"title": "Build",  "text": "Implement iteratively model by model"},
+        {"title": "Run",    "text": "Cutover, parallel run, stabilise"}
+      ]
+    },
+    {
+      "layout": "roadmap_styled",
+      "eyebrow": "TIMELINE",
+      "title": "The path on 12 months, milestones every 2-3 months",
+      "source": "Source: AOSIS plan",
+      "items": [
+        {"date": "Jun '26",   "milestone": "Audit kickoff"},
+        {"date": "Aug '26",   "milestone": "Design validated"},
+        {"date": "Nov '26",   "milestone": "First model in prod"},
+        {"date": "Mar '27",   "milestone": "All models migrated"},
+        {"date": "Apr '27",   "milestone": "Legacy shutdown"}
+      ]
+    },
+    {
+      "layout": "framework_3cards",
+      "eyebrow": "FRAMEWORK",
+      "title": "Three pillars that structure our delivery",
+      "source": "Source: AOSIS framework",
+      "items": [
+        {"title": "Quick wins",       "bullets": "• Refactor critical batches\n• Index optimization"},
+        {"title": "Strategic moves",  "bullets": "• Engine migration\n• CDC pipelines"},
+        {"title": "Tech hygiene",     "bullets": "• Cleanup dead tables\n• Documentation"}
+      ]
+    },
+    {
+      "layout": "next_steps",
+      "eyebrow": "NEXT STEPS",
+      "title": "The four actions to launch this week",
+      "source": "Source: AOSIS action plan",
+      "items": [
+        {"action": "Kickoff workshop with stakeholders", "owner": "Director",   "date": "12/06/26"},
+        {"action": "Architecture review",                "owner": "Architect",  "date": "15/06/26"},
+        {"action": "Phase 1 detailed scoping",           "owner": "Lead",       "date": "20/06/26"},
+        {"action": "Steering committee setup",           "owner": "Sponsor",    "date": "25/06/26"}
+      ]
+    }
+  ],
+  "closing": false
+}

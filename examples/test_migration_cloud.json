@@ -1,0 +1,250 @@
+{
+  "slides": [
+    {
+      "layout": "cover",
+      "title": "Migration vers le cloud",
+      "subtitle": "Une feuille de route pour TechnoLog SA — stratégie, étapes et bénéfices attendus",
+      "ref": "Mai 2026"
+    },
+
+    {
+      "layout": "agenda_diagonal",
+      "title": "Sommaire",
+      "image_keyword": "business meeting overview",
+      "items": [
+        {"title": "Diagnostic du SI actuel"},
+        {"title": "Vision & recommandation stratégique"},
+        {"title": "Plan d'exécution sur 22 mois"},
+        {"title": "Méthode et facteurs de succès"},
+        {"title": "Roadmap et next steps"},
+        {"title": "Annexes & coordonnées"}
+      ]
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Diagnostic du SI actuel",
+      "item_number": "01",
+      "image_keyword": "data center server room"
+    },
+
+    {
+      "layout": "executive_summary",
+      "title": "Synthèse exécutive en 3 messages",
+      "source": "Source: synthèse AOSIS — Mai 2026",
+      "items": [
+        {
+          "title": "Le SI atteint ses limites",
+          "bullets": "Disponibilité 96.4 % vs cible industrie 99.5 %\n47 incidents critiques en 2025 (×2.5 vs 2023)\nDatacenter Lyon saturé à 87 % — colocation expire fin 2027"
+        },
+        {
+          "title": "Replatform AWS recommandé",
+          "bullets": "Meilleur ratio bénéfice/risque\nGain TCO -26 %, disponibilité 99.8 %\n22 mois d'exécution, 3.4 M€ d'investissement"
+        },
+        {
+          "title": "AOSIS accompagne de bout en bout",
+          "bullets": "Cadrage, design, exécution par vagues\n4 consultants dédiés sur 22 mois\nFinOps et upskilling intégrés au programme"
+        }
+      ]
+    },
+
+    {
+      "layout": "hero_stat",
+      "title": "L'AMPLEUR DU PROBLÈME",
+      "value": "+147 %",
+      "label": "L'augmentation des incidents critiques entre 2023 et 2025",
+      "supporting": "47 incidents en 2025 contre 19 en 2023 — l'infrastructure actuelle ne tient plus la charge"
+    },
+
+    {
+      "layout": "kpi_with_chart",
+      "title": "TCO infrastructure — trajectoire actuelle et cible 2029",
+      "source": "Source: analyse AOSIS — données TechnoLog 2025",
+      "kpis": [
+        {"label": "TCO 2025",      "value": "4.2 M€"},
+        {"label": "Cible 2028",    "value": "3.1 M€"},
+        {"label": "Économie/an",   "value": "1.1 M€"}
+      ],
+      "chart": {
+        "type": "line",
+        "labels": ["2025", "2026", "2027", "2028", "2029"],
+        "series": [
+          {"name": "TCO scénario migration", "values": [4.2, 4.4, 3.8, 3.1, 2.9]},
+          {"name": "TCO statu quo",          "values": [4.2, 4.6, 5.0, 5.4, 5.8]}
+        ],
+        "y_label": "M€"
+      }
+    },
+
+    {
+      "layout": "matrix_2x2_styled",
+      "title": "Priorisation des 47 applications — par impact et effort",
+      "source": "Source: cartographie applicative AOSIS — Mars 2026",
+      "x_axis": {"label": "Effort de migration", "low": "Faible", "high": "Élevé"},
+      "y_axis": {"label": "Impact business",     "low": "Faible", "high": "Élevé"},
+      "quadrants": {
+        "top_left":     {"title": "Quick wins",            "items": ["Site corporate", "Jira / Confluence", "Backup S3", "Email & collaboration"]},
+        "top_right":    {"title": "Priorités stratégiques","items": ["ERP industriel", "MES production", "CRM commercial", "Suite BI"]},
+        "bottom_left":  {"title": "Maintenir",             "items": ["Intranet documentation", "App inventaire fournitures"]},
+        "bottom_right": {"title": "Reconsidérer",          "items": ["Apps legacy isolées", "Archive RH"]}
+      }
+    },
+
+    {
+      "layout": "quote_callout",
+      "eyebrow": "VOIX DES STAKEHOLDERS",
+      "title": "Ce que nous ont dit les dirigeants",
+      "takeaway": "Le board a déjà tranché. Reste à exécuter sans rater le calendrier.",
+      "quote_text": "Notre ERP doit être disponible 24/7 pendant les pics de production. Aujourd'hui ce n'est plus tenable.",
+      "quote_attribution": "— Marc Lefèvre, COO TechnoLog"
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Vision & recommandation stratégique",
+      "item_number": "02",
+      "image_keyword": "business strategy whiteboard"
+    },
+
+    {
+      "layout": "big_idea",
+      "idea": "Passer du SI hérité au cloud n'est plus une option : c'est la condition de notre capacité d'innovation sur 2027-2030.",
+      "title": "Notre conviction",
+      "attribution": "— Direction AOSIS"
+    },
+
+    {
+      "layout": "framework_3cards",
+      "title": "Les 3 piliers indispensables à la réussite de cette transformation",
+      "source": "Source: retours d'expérience AOSIS — 15 migrations cloud réalisées",
+      "icons": ["mdi:account-tie", "mdi:school", "mdi:tools"],
+      "items": [
+        {
+          "title": "Sponsorship",
+          "bullets": "Comité de pilotage mensuel CODIR\nTableau de bord trimestriel\nArbitrages portés au plus haut"
+        },
+        {
+          "title": "Compétences",
+          "bullets": "Formation AWS pour 12 IT\n3 certifications cibles sur 18 mois\nCloud Center of Excellence à terme"
+        },
+        {
+          "title": "Méthode & outillage",
+          "bullets": "Agile par vagues de 6-8 apps\nTerraform IaC + GitOps\nObservabilité dès J+0"
+        }
+      ]
+    },
+
+    {
+      "layout": "funnel",
+      "title": "TCO cumulé sur 5 ans — 4 trajectoires comparées",
+      "stages": [
+        {"label": "Statu quo (no migration)", "value": "22.1 M€"},
+        {"label": "Lift & Shift (Option A)",  "value": "18.5 M€"},
+        {"label": "Replatform (Option B) ⭐", "value": "16.2 M€"},
+        {"label": "Refactor cloud-native (C)","value": "14.8 M€"}
+      ]
+    },
+
+    {
+      "layout": "comparison_2cols",
+      "title": "Option A (Lift & Shift) vs Option B (Replatform) — pourquoi nous recommandons B",
+      "source": "Source: analyse multi-critères AOSIS — Avril 2026",
+      "items": [
+        {
+          "title": "Option A — Lift & Shift",
+          "bullets": "14 mois, 2.1 M€\nGain TCO -8 % seulement\nRisque faible\nMais aucun bénéfice cloud-natif"
+        },
+        {
+          "title": "Option B — Replatform ⭐",
+          "bullets": "22 mois, 3.4 M€\nGain TCO -26 %\nRisque modéré, maîtrisable\nManaged services AWS + scaling"
+        }
+      ]
+    },
+
+    {
+      "layout": "section_diagonal",
+      "title": "Plan d'exécution",
+      "item_number": "03",
+      "image_keyword": "project timeline planning"
+    },
+
+    {
+      "layout": "comparison_before_after",
+      "title": "Le saut que nous proposons — avant / après migration",
+      "takeaway": "Une transformation mesurable sur les 4 KPI majeurs : disponibilité, TCO, agilité, focus innovation.",
+      "before": {
+        "title": "Avant migration (2025)",
+        "bullets": "47 apps sur 3 sites\nDisponibilité 96.4 %, 47 incidents/an\nTCO 4.2 M€, provisionnement 23 jours\nEffort maintenance 62 % DSI"
+      },
+      "after": {
+        "title": "Après migration (2028)",
+        "bullets": "75 % cloud AWS / 15 % edge / 10 % on-prem\nDisponibilité 99.8 %, < 12 incidents/an attendus\nTCO 3.1 M€, provisionnement 2 heures\nEffort maintenance 38 %, innovation 24 %"
+      }
+    },
+
+    {
+      "layout": "process_steps",
+      "title": "Notre méthode en 4 étapes — éprouvée sur 15 migrations cloud",
+      "items": [
+        {"title": "Assessment", "text": "Audit technique, cartographie des dépendances, analyse 6 R"},
+        {"title": "Design",     "text": "Architecture cible par app, cost estimation, risk register"},
+        {"title": "Migrate",    "text": "Exécution par vague de 6 à 8 apps, validation post-migration"},
+        {"title": "Optimize",   "text": "Right-sizing, auto-scaling, reserved instances, FinOps"}
+      ]
+    },
+
+    {
+      "layout": "roadmap_styled",
+      "title": "5 phases sur 22 mois pour boucler la migration de TechnoLog",
+      "source": "Source: planning détaillé AOSIS — Phase Replatform Option B",
+      "items": [
+        {"date": "Jan '26",  "milestone": "Phase 0 — Quick wins + setup AWS"},
+        {"date": "Mai '26",  "milestone": "Phase 1 — Apps non-critiques (12 apps, 4 mois)"},
+        {"date": "Oct '26",  "milestone": "Phase 2 — Apps support (15 apps, 5 mois)"},
+        {"date": "Avr '27",  "milestone": "Phase 3 — ERP + apps critiques (8 apps, 6 mois)"},
+        {"date": "Nov '27",  "milestone": "Phase 4 — Décom du datacenter Lyon"}
+      ]
+    },
+
+    {
+      "layout": "text_dense_3cols",
+      "title": "3 angles d'analyse pour cadrer la décision",
+      "items": [
+        {
+          "title": "Angle technique",
+          "text": "La replatformisation permet d'utiliser les managed services AWS (RDS, ElastiCache, MSK) qui réduisent l'effort opérationnel de 40 à 60 %. EC2 reste pour les workloads non éligibles, avec un parc cible de 35-50 % de la flotte initiale."
+        },
+        {
+          "title": "Angle économique",
+          "text": "L'investissement total de 3.4 M€ se rentabilise sur 32 mois grâce au gain TCO de 1.1 M€/an. ROI 5 ans : 280 %. Les coûts évités liés aux incidents (1.2 M€/an actuellement) renforcent le business case."
+        },
+        {
+          "title": "Angle organisationnel",
+          "text": "Upskilling de 12 IT sur 18 mois, création d'un Cloud Center of Excellence à terme, évolution des modes de travail vers DevOps et Site Reliability Engineering. Conduite du changement intégrée au programme."
+        }
+      ]
+    },
+
+    {
+      "layout": "next_steps",
+      "title": "4 actions pour démarrer dans les 90 jours",
+      "items": [
+        {"action": "Validation comité",      "owner": "CODIR",              "date": "15 juin 2026"},
+        {"action": "Cadrage Phase 0",        "owner": "DSI + AOSIS",        "date": "30 juin 2026"},
+        {"action": "Choix partenaire AWS",   "owner": "Achats + DSI",       "date": "15 juillet 2026"},
+        {"action": "Kick-off du projet",     "owner": "COO + DSI + AOSIS",  "date": "1er septembre 2026"}
+      ]
+    },
+
+    {
+      "layout": "closing_diagonal",
+      "title": "Merci",
+      "image_keyword": "business handshake success",
+      "question": "Des questions ?",
+      "author_name": "Florian Horellou",
+      "author_email": "florian.horellou@aosis.net",
+      "author_phone": "+33 6 36 26 17 47"
+    }
+  ],
+  "closing": false
+}

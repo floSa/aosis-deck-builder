@@ -1,0 +1,37 @@
+{
+  "cover": {"title": "Refonder le reporting risque", "ref": "Mai 2026"},
+  "slides": [
+    {
+      "layout": "hero_stat",
+      "title": "L'AMBITION",
+      "value": "-75%",
+      "label": "C'est le temps de production que nous allons reprendre",
+      "context": "De 8h à 2h par cycle, en 12 mois",
+      "supporting": ["BCBS 239 conforme par construction", "Lineage bout-en-bout traçable"]
+    },
+    {
+      "layout": "matrix_2x2",
+      "title": "Cartographie des chantiers identifiés",
+      "x_axis": {"label": "Effort", "low": "Faible", "high": "Élevé"},
+      "y_axis": {"label": "Impact", "low": "Faible", "high": "Élevé"},
+      "quadrants": {
+        "top_left":     {"title": "Quick wins",             "items": ["Refactor batchs"]},
+        "top_right":    {"title": "Chantiers stratégiques", "items": ["Refonte lineage", "Migration moteur"]},
+        "bottom_left":  {"title": "Hygiène technique",      "items": ["Documentation"]},
+        "bottom_right": {"title": "À deprioriser",          "items": ["Refonte UI legacy"]}
+      }
+    },
+    {
+      "layout": "roadmap",
+      "title": "Le chemin sur 12 mois",
+      "milestones": [
+        {"date": "Juin '26", "name": "Audit",         "detail": "Cartographie + quick wins"},
+        {"date": "Août '26", "name": "Conception",    "detail": "Architecture cible"},
+        {"date": "Nov '26",  "name": "First release", "detail": "Premier lot en production"},
+        {"date": "Mars '27", "name": "Build complet", "detail": "Modules livrés"},
+        {"date": "Juin '27", "name": "Bascule",       "detail": "Plateforme historique éteinte"}
+      ]
+    }
+  ],
+  "closing": true
+}

@@ -1,0 +1,118 @@
+{
+  "cover": {
+    "title": "Notre proposition pour refonder le reporting risque",
+    "ref": "Mai 2026 — AOSIS pour Banque XYZ"
+  },
+  "slides": [
+    {
+      "layout": "hero_stat",
+      "title": "L'AMBITION",
+      "value": "-75 %",
+      "label": "Le temps de production que nous allons reprendre",
+      "supporting": "De 8h à 2h par cycle de reporting risque"
+    },
+    {
+      "layout": "big_idea",
+      "idea": "Refonder la chaîne de bout en bout, pas optimiser à la marge.",
+      "title": "Notre conviction",
+      "attribution": "— Équipe Risk Reporting, AOSIS"
+    },
+    {
+      "layout": "matrix_2x2",
+      "title": "Cartographie des chantiers",
+      "x_axis": {"label": "Effort", "low": "Faible", "high": "Élevé"},
+      "y_axis": {"label": "Impact", "low": "Faible", "high": "Élevé"},
+      "quadrants": {
+        "top_left":     {"title": "Quick wins",            "items": ["Refactor batchs", "Lineage automatique"]},
+        "top_right":    {"title": "Chantiers stratégiques","items": ["Refonte data model", "Nouvelle plateforme"]},
+        "bottom_left":  {"title": "Hygiène",               "items": ["Documentation", "Tests de non-régression"]},
+        "bottom_right": {"title": "À deprioriser",         "items": ["Refonte UI legacy"]}
+      }
+    },
+    {
+      "layout": "funnel",
+      "title": "Le funnel de qualité — où on perd 80 % du temps",
+      "stages": [
+        {"label": "Données brutes",  "value": "100 %"},
+        {"label": "Après contrôles", "value": "85 %"},
+        {"label": "Après retraitement", "value": "60 %"},
+        {"layout": "Livrable final", "label": "Livrable final", "value": "20 %"}
+      ]
+    },
+    {
+      "layout": "comparison",
+      "title": "Le saut que nous proposons",
+      "left":  {"title": "Aujourd'hui", "items": ["8h par cycle", "Reprise manuelle", "3 équipes mobilisées"]},
+      "right": {"title": "Cible T+12 mois", "items": ["2h par cycle", "Automatisation native", "1 équipe pilote"]}
+    },
+    {
+      "layout": "kpi_with_chart",
+      "title": "Trajectoire de la cible sur 4 trimestres",
+      "source": "Source: simulation AOSIS",
+      "kpis": [
+        {"label": "Réduction temps", "value": "-75 %"},
+        {"label": "Couverture",       "value": "100 %"},
+        {"label": "Économie/an",      "value": "1.2 M€"}
+      ],
+      "chart": {
+        "type": "line",
+        "labels": ["Q1", "Q2", "Q3", "Q4"],
+        "series": [
+          {"name": "Réel",  "values": [100, 80, 50, 25]},
+          {"name": "Cible", "values": [100, 75, 45, 25]}
+        ]
+      }
+    },
+    {
+      "layout": "roadmap",
+      "title": "Le chemin sur 12 mois, jalonné en 4 milestones",
+      "milestones": [
+        {"date": "Juin '26",   "name": "Audit",         "detail": "Cartographie de l'existant"},
+        {"date": "Sept '26",   "name": "Cadrage cible", "detail": "Data model + architecture"},
+        {"date": "Nov '26",    "name": "First release", "detail": "Premier lot en production"},
+        {"date": "Juin '27",   "name": "Bascule",       "detail": "Plateforme cible en service"}
+      ]
+    },
+    {
+      "layout": "process",
+      "title": "Notre approche en 4 phases",
+      "steps": [
+        {"title": "Audit",     "detail": "Cartographie data + processus existants"},
+        {"title": "Cadrage",   "detail": "Cible architecturale + plan de migration"},
+        {"title": "Build",     "detail": "Refonte par lots, tests à chaque palier"},
+        {"title": "Bascule",   "detail": "Mise en service + accompagnement équipes"}
+      ]
+    },
+    {
+      "layout": "quote",
+      "text": "Aujourd'hui on passe 80 % de notre temps à fiabiliser et 20 % à analyser. Il faut inverser la proportion.",
+      "author": "Directeur du Risk Reporting"
+    },
+    {
+      "layout": "cards",
+      "title": "L'équipe que nous mobilisons",
+      "cards": [
+        {"title": "Floriane M.",  "subtitle": "Directrice projet",     "body": "12 ans en transformation data finance"},
+        {"title": "Karim T.",     "subtitle": "Architecte data",        "body": "Ex-BNP, expert lineage et MDM"},
+        {"title": "Léa B.",       "subtitle": "Lead développeuse",      "body": "Python/Airflow/dbt, 8 ans"}
+      ]
+    },
+    {
+      "layout": "hero_stat",
+      "title": "L'ENJEU",
+      "value": "1.2 M€",
+      "label": "L'économie annuelle dès la 2ᵉ année",
+      "context": "Sur la base de 6h reprises × 5 cycles/mois × 12 mois × 4 000 €/jour"
+    },
+    {
+      "layout": "text",
+      "title": "Prochaines étapes",
+      "bullets": [
+        "Cadrage détaillé avec le sponsor — S+1",
+        "Constitution de l'équipe projet — S+2",
+        "Kick-off et début de l'audit — S+3"
+      ]
+    }
+  ],
+  "closing": true
+}

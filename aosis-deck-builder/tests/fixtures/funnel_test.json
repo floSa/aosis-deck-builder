@@ -1,0 +1,14 @@
+{
+  "cover": {"title": "Test funnel", "ref": "C3"},
+  "slides": [{
+    "layout": "funnel",
+    "title": "Test pour vérifier navy_alt",
+    "stages": [
+      {"name": "Stage 0", "value": "100"},
+      {"name": "Stage 1", "value": "75"},
+      {"name": "Stage 2", "value": "50"},
+      {"name": "Stage 3", "value": "25"}
+    ]
+  }],
+  "closing": false
+}
