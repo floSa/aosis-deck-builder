@@ -167,25 +167,35 @@ Claude Desktop est l'application de bureau Anthropic (Mac/Windows/Linux) qui con
 
 ### 4.1 — Préparer le ZIP
 
-Le ZIP doit contenir un **dossier** qui contient le `SKILL.md` et ses dépendances.
+Le ZIP doit contenir un **dossier racine** `aosis-deck-builder/` qui contient le `SKILL.md` et ses dépendances. Le script `build_bundle.sh` à la racine du projet automatise tout :
 
 ```bash
 cd ~/Projets/Skill_pptx_Aosis
-zip -r aosis-deck-builder.zip aosis-deck-builder/ \
-  -x "aosis-deck-builder/__pycache__/*" \
-  -x "aosis-deck-builder/.pytest_cache/*" \
-  -x "aosis-deck-builder/tests/__pycache__/*"
+./build_bundle.sh
 ```
 
-**Vérifications avant upload** :
-- Le ZIP doit faire moins de 50 Mo (limite Anthropic)
-- Le fichier `SKILL.md` doit avoir un frontmatter YAML valide
-- Pas de symlinks dans le ZIP
+Ce script :
+1. Nettoie les fichiers parasites (`~$*` lock files PowerPoint, `*.Zone.Identifier`)
+2. Vérifie le frontmatter YAML de `SKILL.md`
+3. Crée `aosis-deck-builder.zip` en excluant `__pycache__/`, `.pytest_cache/`, `*.pyc`, `*.Zone.Identifier`, lock files
+4. Vérifie qu'aucun fichier parasite ne s'est glissé dans le bundle
+5. Vérifie la structure (`aosis-deck-builder/SKILL.md` à la racine du ZIP)
+
+**Vérifications faites par le script** :
+- Dossier racine `aosis-deck-builder/` présent
+- `SKILL.md` à `aosis-deck-builder/SKILL.md` (la racine attendue par Claude.ai)
+- Aucun parasite (caches, lock files, Zone.Identifier)
+- Taille typique ≈ 700 KB, bien sous la limite Anthropic de 50 Mo
+
+Si tu veux inspecter le contenu manuellement :
 
 ```bash
-unzip -l aosis-deck-builder.zip | head -20
-# Doit montrer aosis-deck-builder/ comme dossier racine + SKILL.md à l'intérieur
+python3 -m zipfile -l aosis-deck-builder.zip | head -30
+# ou si zip/unzip est installé :
+unzip -l aosis-deck-builder.zip | head -30
 ```
+
+> ℹ️ **Note** : la version précédente du script produisait un fichier `.skill` (zip plat sans dossier racine). Claude.ai rejetait ce format avec `"no SKILL.md found"`. Le nouveau format `.zip` avec dossier racine est le bon.
 
 ### 4.2 — Activer la fonctionnalité Skills
 

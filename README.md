@@ -40,7 +40,7 @@ CLI flags : `--debug-layouts`, `--no-images`, `--no-cache-images`, `--clear-imag
 ├── README.md                          # vous êtes ici
 ├── CHANGELOG.md                       # changelog synthétique
 ├── .env.example                       # template de configuration (.env gitignored)
-├── build_bundle.sh                    # regénère aosis-deck-builder.skill
+├── build_bundle.sh                    # regénère aosis-deck-builder.zip
 ├── test_skill.sh                      # smoke-test rapide
 │
 ├── aosis-deck-builder/                # le skill Claude (source)
@@ -63,7 +63,7 @@ CLI flags : `--debug-layouts`, `--no-images`, `--no-cache-images`, `--clear-imag
 │   │   └── AOSIS_template.pptx        # template canonique, source unique de charte
 │   └── tests/test_smoke.py            # 90 tests pytest
 │
-├── aosis-deck-builder.skill           # bundle zippé, uploadable dans Claude
+├── aosis-deck-builder.zip             # bundle zippé, uploadable dans Claude.ai
 │
 ├── docs/                              # documentation
 │   ├── README.md                      # index des docs
@@ -91,7 +91,7 @@ Après toute modif source (`scripts/`, `references/`, `SKILL.md`, `assets/`), re
 ./build_bundle.sh
 ```
 
-Produit `aosis-deck-builder.skill` (~670 KB), exclut tests/, caches, backups.
+Produit `aosis-deck-builder.zip` (~700 KB) avec dossier racine `aosis-deck-builder/`, prêt à uploader sur Claude.ai. Exclut caches, lock files, Zone.Identifier.
 
 ## Brand customisation
 
