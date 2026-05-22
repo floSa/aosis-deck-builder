@@ -15,6 +15,17 @@ Chaque chantier (= mini-mission de modification) a son rapport de décision dét
 
 | Chantier | Sujet | Rapport |
 |---:|---|---|
+| 1 | Roadmap geometry bounds fix | [chantier1_report.md](chantiers/chantier1_report.md) |
+| 2 | (cf rapport) | [chantier2_report.md](chantiers/chantier2_report.md) |
+| 3 | Dynamic palette loading depuis theme XML | [chantier3_report.md](chantiers/chantier3_report.md) |
+| 4 | (cf rapport) | [chantier4_report.md](chantiers/chantier4_report.md) |
+| 5 | (cf rapport) | [chantier5_report.md](chantiers/chantier5_report.md) |
+| 6 | Visual review pipeline | [chantier6_report.md](chantiers/chantier6_report.md) |
+| 7 | Template-based layouts via exhibits.pptx | [chantier7_report.md](chantiers/chantier7_report.md) |
+| 8 | Wiring matplotlib charts pour kpi_with_chart (8 types) | [chantier8_report.md](chantiers/chantier8_report.md) |
+| Consolidation | Fusion `exhibits.pptx` dans `AOSIS_template.pptx` | [chantier_consolidation_report.md](chantiers/chantier_consolidation_report.md) |
+| Exhibits | Construction des slides modèles exhibits | [chantier_exhibits_report.md](chantiers/chantier_exhibits_report.md) |
+| Naming | Nommage de toutes les slides via cSld.name | [chantier_naming_report.md](chantiers/chantier_naming_report.md) |
 | Ménage | Repackaging du dossier de travail (`examples/`, `_archive/`) | [chantier_menage_report.md](chantiers/chantier_menage_report.md) |
 | Alternances | Fix alternances visuelles 3 layouts (framework, roadmap, process) | [chantier_alternances_report.md](chantiers/chantier_alternances_report.md) |
 | 9 | Polish : sommaire, roadmap, kpi_with_chart, icônes Iconify | [chantier9_report.md](chantiers/chantier9_report.md) |
@@ -32,3 +43,9 @@ Chaque chantier (= mini-mission de modification) a son rapport de décision dét
 | 21 | Refonte `kpi_with_chart` : horizontal → vertical | [chantier21_report.md](chantiers/chantier21_report.md) |
 | 22 | Cache disque pour les images Pexels | [chantier22_report.md](chantiers/chantier22_report.md) |
 | 23 | Nettoyage : retrait de 10 layouts code-based dépréciés | [chantier23_report.md](chantiers/chantier23_report.md) |
+| 24 | Nettoyage et réorganisation du repo | [chantier24_report.md](chantiers/chantier24_report.md) |
+
+## Archive
+
+- [`_archive_C24/`](_archive_C24/) — 2 documents internes datés 2026-05-13 (audit + documentation skill) récupérés au Chantier 24
+- [`test_inputs/`](test_inputs/) — PDF source ayant servi à générer le deck Cloud Computing 2026
