@@ -230,8 +230,9 @@ Mission — Génération d'un deck consulting via aosis-deck-builder
 Tu as accès au skill dans `aosis-deck-builder/`. Avant toute génération, lis impérativement et dans cet ordre :
 
 1. SKILL.md
-2. references/layouts.md — fiches de tous les layouts disponibles
-3. references/json-schema.md — formats JSON par layout
+2. references/philosophy.md — philosophie éditoriale consulting (action titles, ghost deck test, structure narrative)
+3. references/layouts.md — fiches de tous les layouts disponibles
+4. references/json-schema.md — formats JSON par layout
 
 RÈGLES STRICTES DE QUALITÉ ÉDITORIALE
 
@@ -276,6 +277,21 @@ Avant de générer le JSON spec, propose-moi un plan en bullet list :
 - Take-away en 1 phrase
 
 Attends ma validation du plan avant de générer.
+
+Étape supplémentaire — Ghost deck test (obligatoire avant génération)
+
+Une fois ton plan validé, AVANT de générer le JSON :
+
+1. Liste uniquement les titres de toutes les slides en séquence
+2. Lis-les comme s'ils formaient un texte continu
+3. Vérifie que :
+   - Chaque titre est une phrase d'action complète (jamais un mot-clé)
+   - La séquence raconte une histoire logique et complète
+   - Aucun titre ne pourrait être déplacé sans perte de sens
+4. Si un titre échoue à un de ces critères, reformule-le avant de
+   générer le JSON
+5. Présente brièvement le résultat du ghost deck test dans le chat
+   (les titres en séquence) pour validation finale par l'utilisateur
 
 Confirme à la fin :
 - Layouts effectivement utilisés
