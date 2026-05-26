@@ -20,6 +20,7 @@ This keeps chart_engine.py decoupled from build_deck.py's import chain.
 from __future__ import annotations
 
 import io
+import sys
 from typing import Optional
 
 
@@ -123,6 +124,40 @@ def render_chart_to_png(chart_spec: dict, width_emu: int, height_emu: int):
     fig, ax = plt.subplots(figsize=(w_in, h_in), dpi=150)
 
     kind = chart_spec.get("type", "bar")
+
+    # Chantier 26 — coalesce 'values' to 'series' for chart types that expect
+    # a list of series (line, bar_stacked). Before this fix, passing
+    # {type: 'line', labels: [...], values: [...]} silently produced an empty
+    # plot because _render_line read spec.get('series', []) and found nothing.
+    # Now {values} is promoted to a single-series shape on the fly. The
+    # canonical 'series' format still wins if both are present.
+    _SERIES_REQUIRING_KINDS = {"line", "bar_stacked"}
+    if (kind in _SERIES_REQUIRING_KINDS
+            and "values" in chart_spec
+            and "series" not in chart_spec):
+        chart_spec = dict(chart_spec)  # shallow copy — don't mutate caller's spec
+        chart_spec["series"] = [{
+            "name": chart_spec.get("series_name", ""),
+            "values": chart_spec["values"],
+        }]
+        sys.stderr.write(
+            f"chart_engine: '{kind}' chart received 'values' (single-series "
+            "format), coalesced to 'series'. Prefer the canonical "
+            "'series=[{name,values}]' form for multi-series charts.\n"
+        )
+
+    # Chantier 26 — explicit error if the spec carries no data at all.
+    # Previously the renderer produced a blank chart silently. Combo has its
+    # own dual sub-specs ('bars'/'line'), so it's exempt from this check.
+    if kind not in ("combo",):
+        _has_series_data = bool(chart_spec.get("series"))
+        _has_flat_values = bool(chart_spec.get("values"))
+        if not _has_series_data and not _has_flat_values:
+            raise ValueError(
+                f"chart_spec requires either 'series' (list of {{name, values}}) "
+                f"or 'values' (simple list). Got: {sorted(chart_spec.keys())}"
+            )
+
     dispatch = {
         "bar":          _render_bar,
         "barh":         _render_barh,

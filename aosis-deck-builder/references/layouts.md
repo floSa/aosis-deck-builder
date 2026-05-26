@@ -313,9 +313,9 @@ Pour chaque slide à générer :
 
 **Quand l'utiliser** : Synthétiser un framework / méthodologie en 3 piliers. Ex: "Sponsorship / Compétences / Méthode". Le champ `icons` permet d'ajouter une icône par carte via Iconify (cf. [`icons_suggested.md`](icons_suggested.md)).
 
-**Quand ne pas l'utiliser** : Pour 4+ piliers (le template n'a que 3 cartes — au-delà ça se serre). Pour des items à expliquer en > 4 bullets chacun (utiliser `text_dense_3cols`).
+**Quand ne pas l'utiliser** : Pour 4+ piliers (le layout est calibré pour exactement 3 cartes — voir Limites techniques). Pour des items à expliquer en > 4 bullets chacun (utiliser `text_dense_3cols`).
 
-**Limites techniques** : 3 cartes optimales. Au-delà, distribution horizontale serre. Alternance de fond gérée par le moteur ; les icônes sont téléchargées depuis Iconify (skip silencieux si réseau down).
+**Limites techniques** : **Maximum 3 cartes — cap dur depuis le Chantier 26.** Au-delà de 3 items, le moteur lève une `ValueError` explicite (`"Layout 'framework_3cards' accepts max 3 items..."`) pointant vers les alternatives. Raison : la distribution horizontale repositionne les groupes REPEAT_ITEM mais ne redimensionne pas les shapes internes — à 4 items, les cards se chevauchent et les titres sont tronqués par le card voisin. **Alternatives pour 4+ piliers** : splitter en deux slides `framework_3cards` (3+1 ou 2+2), ou composer un `canvas_blank` avec N `kpi_card` blocks libres. Alternance de fond gérée par le moteur ; icônes téléchargées depuis Iconify (skip silencieux si réseau down).
 
 **Exemple JSON minimal** :
 ```json

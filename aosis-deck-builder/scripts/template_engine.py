@@ -132,6 +132,19 @@ PAGINATED_LAYOUTS = {
     'agenda_diagonal': 7,  # Chantier 11 — back to 7 for breathing room
 }
 
+# Chantier 26 — hard cap on REPEAT_ITEM count for layouts whose template shapes
+# are sized for a specific N. Above this cap, the horizontal distribution
+# shifts groups but does NOT resize their inner shapes — cards overlap and
+# titles get truncated by the neighbouring card's background. Caught at spec
+# entry with an explicit ValueError pointing to alternative layouts.
+MAX_ITEMS_BY_LAYOUT = {
+    'framework_3cards': 3,
+}
+
+_MAX_ITEMS_ALTERNATIVES = {
+    'framework_3cards': "split into multiple slides, or use 'canvas_blank' with kpi_card blocks for 4+ cards",
+}
+
 # Tag → spec list key (used by indexed placeholders `{{TAG_<N>_<KEY>}}`).
 TAG_TO_LIST_KEY = {
     'KPI': 'kpis',
@@ -561,6 +574,19 @@ def _process_repeat_items(slide, layout_name: str, spec: dict) -> None:
     # Identify the source spec key:
     spec_key = _infer_repeat_spec_key(layout_name, spec)
     items = spec.get(spec_key, [])
+
+    # Chantier 26 — enforce per-layout caps before any rendering work. The
+    # framework_3cards template is calibrated for exactly 3 cards; with N=4+
+    # the horizontal distribution only shifts groups laterally without
+    # resizing their inner shapes, producing overlap + truncated titles.
+    max_items = MAX_ITEMS_BY_LAYOUT.get(layout_name)
+    if max_items is not None and len(items) > max_items:
+        alt = _MAX_ITEMS_ALTERNATIVES.get(layout_name, "see references/layouts.md")
+        raise ValueError(
+            f"Layout '{layout_name}' accepts max {max_items} items "
+            f"(got {len(items)}). For more items: {alt}. "
+            f"See references/layouts.md for alternatives."
+        )
 
     parent = template_shape._element.getparent()
 
@@ -1176,6 +1202,14 @@ def _maybe_shrink_to_fit(sp_element, text: str, min_sz: int = 1000) -> None:
 def _resolve_item_value(item, key: str, index: int, distribution: str):
     """Look up `key` in `item`. Special keys: 'number' auto-fills index+1
     if not present; 'marker' is intentionally ignored (styling)."""
+    # Chantier 26 — auto-numbering applies to both dict items (when 'number'
+    # is missing) and plain string items. The previous version only auto-
+    # filled when item was a dict, so agenda specs passing a list of strings
+    # ended up with the template's default "01" on every slot.
+    if key == 'number':
+        if isinstance(item, dict) and 'number' in item:
+            return item['number']
+        return f'{index + 1:02d}'
     if not isinstance(item, dict):
         # If item is a plain string, the single text slot is filled with it
         if key in ('text', 'title', 'label', 'name'):
@@ -1183,9 +1217,6 @@ def _resolve_item_value(item, key: str, index: int, distribution: str):
         return None
     if key in item:
         return item[key]
-    # Auto-fill for {{ITEM_NUMBER}}
-    if key == 'number':
-        return f'{index + 1:02d}'
     return None
 
 

@@ -271,6 +271,8 @@ correction :
 | Deck qui se termine par "Thank You" générique                | Toujours `closing_diagonal` AOSIS + `final_branding`                      |
 | Deux idées sur une même slide                                | Splitter en deux slides (une = un message)                                |
 | Citation inventée non signalée                               | Signaler à l'utilisateur dans le chat ou retirer la citation              |
+| 4 cartes (ou plus) dans `framework_3cards`                   | Cap dur à 3 cartes — splitter en deux slides (3+1 ou 2+2), ou composer un `canvas_blank` avec N `kpi_card` blocks libres. Le moteur lève une `ValueError` au-delà de 3. |
+| Chart `line` avec `values` (single-series) au lieu de `series` | Le moteur coalesce automatiquement depuis le Chantier 26, mais la forme canonique reste `series=[{name, values}]`. Pour multi-séries, c'est obligatoire. |
 
 ---
 

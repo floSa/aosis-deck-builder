@@ -1,0 +1,47 @@
+{
+  "_comment": "Spec de validation des 3 fix du Chantier 26. Exerce explicitement (1) agenda_diagonal avec items strings (auto-numbering), (2) line chart avec format 'values' (coalesce vers series), (3) framework_3cards avec 3 cartes (cap respecte). Adapte depuis test_AB_experiment.json du Chantier 25.",
+  "cover": {
+    "title": "Le Cloud Computing en 2026 — Validation Chantier 26",
+    "ref": "Mai 2026 — Test fix sommaire/chart/framework"
+  },
+  "slides": [
+    {
+      "layout": "agenda_diagonal",
+      "title": "Sommaire",
+      "items": [
+        "Diagnostic du marche",
+        "Vision economique",
+        "Strategie recommandee",
+        "Plan d'execution",
+        "Next steps a 90 jours"
+      ],
+      "image_keyword": "cloud computing data center"
+    },
+    {
+      "layout": "kpi_with_chart",
+      "title": "93 % du Fortune 500 utilise le cloud — adoption universelle",
+      "source": "Source : analyse AOSIS",
+      "kpis": [
+        {"label": "Fortune 500 en 2025", "value": "93 %"},
+        {"label": "vs 2019", "value": "42 %"},
+        {"label": "Stratégie multi-cloud", "value": "89 %"}
+      ],
+      "chart": {
+        "type": "line",
+        "labels": ["2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+        "values": [42, 51, 63, 72, 81, 88, 93]
+      }
+    },
+    {
+      "layout": "framework_3cards",
+      "title": "Trois leviers convergents portent la migration",
+      "source": "Analyse AOSIS",
+      "items": [
+        {"title": "Réduction du TCO", "bullets": "• -26 % en moyenne\n• Replatform = meilleur ratio"},
+        {"title": "Agilité opérationnelle", "bullets": "• Provisioning 23 j → 4 h\n• Time-to-market -45 %"},
+        {"title": "Modernisation applicative", "bullets": "• Microservices, serverless\n• Catalyseur IA générative"}
+      ]
+    }
+  ],
+  "closing": true
+}

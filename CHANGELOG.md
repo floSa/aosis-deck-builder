@@ -4,6 +4,33 @@ Toutes les modifications notables du skill `aosis-deck-builder` sont documentée
 
 ## [Unreleased]
 
+## Chantier 26 — Fix 3 bugs visuels résiduels (sommaire, chart, framework_3cards)
+
+**Branche** : `fix/sommaire-chart-framework-bugs`
+**Date** : 2026-05-26
+**Statut** : Sur branche fix, en attente de validation visuelle utilisateur avant merge sur `main`
+
+### Fixed
+- **`agenda_diagonal` auto-incrémentation des numéros (`{{ITEM_NUMBER}}`)**. Bug identifié au test A/B C25 : avec un spec passant les items du sommaire comme strings (`["Diagnostic", "Vision", ...]`), tous les placeholders affichaient `"01"` (le texte par défaut du template) au lieu de `"01"`, `"02"`, `"03"`... Cause racine : dans `template_engine.py:1176-1189`, la fonction `_resolve_item_value` avait l'auto-fill de la clé `number` **APRÈS** le test `isinstance(item, dict)`. Quand l'item était une string, le branch `if not isinstance(item, dict): return None` court-circuitait l'auto-fill, et le moteur conservait le texte par défaut "01" du template sur chaque copie REPEAT_ITEM. **Fix** : déplacement de la branche `if key == 'number'` AVANT le test isinstance, avec préservation des `number` explicites quand l'item est un dict. Cas couverts : (a) item dict avec `number` → utilise le `number` du dict (ex : "A", "I", "1bis"), (b) item dict sans `number` → auto-fill `{index+1:02d}`, (c) item string → auto-fill `{index+1:02d}` et la string remplit `text/title/label/name`. 2 nouveaux tests : `test_agenda_diagonal_auto_numbering_from_strings` (5 strings → "01"-"05"), `test_agenda_diagonal_explicit_numbers_preserved` (dict avec "A"/"B"/"C" → conservés verbatim).
+
+- **`chart_engine` chart `line` silencieusement vide quand le spec utilise le format `values`**. Bug identifié au test A/B C25 : un spec `{type: "line", labels: [...], values: [42, 51, ...]}` produisait un cadre matplotlib **complètement vide** sans aucune erreur ni log. Cause racine : dans `chart_engine.py:227-242`, `_render_line` lit `spec.get("series", [])` (liste de séries `{name, values}`), pas `values`. Avec `series` absent, la boucle `for i, s in enumerate(series):` ne faisait aucune itération et `ax.plot()` n'était jamais appelé. Le moteur sauvegardait un PNG d'axes vides (~6-15 KB) sans signaler le problème. Idem pour `bar_stacked`. **Fix** : coalescing automatique dans `render_chart_to_png` (juste après détermination de `kind`) : si `kind ∈ {"line", "bar_stacked"}` et `values` présent mais `series` absent, synthétiser `series = [{name: spec.get("series_name", ""), values: spec["values"]}]` et logger un warning stderr (`chart_engine: 'line' chart received 'values' (single-series format), coalesced to 'series'...`). Validation explicite : si après coalescing aucune donnée (`series` vide ET `values` vide), `raise ValueError("chart_spec requires either 'series'... or 'values'...")` avec les clés du spec en diagnostic. `combo` exempté (sous-specs `bars`/`line`). 3 nouveaux tests : `test_chart_values_format_coalesced_to_series` (line + values → PNG > 18 KB), `test_chart_with_series_still_works` (régression multi-séries), `test_chart_missing_series_and_values_raises` (ValueError + message contient "series" et "values").
+
+- **`framework_3cards` chevauchement + titres tronqués quand 4 items**. Bug identifié au test A/B C25 : passer 4 items à `framework_3cards` (cas réel : "4 moteurs du cloud") produisait des cartes qui se chevauchaient et des titres tronqués ("Réduct", "Agilit", "Scalabi", "Modernisati") — chaque card background opaque peignait par-dessus le titre du voisin. Cause racine : dans `template_engine.py:604-617`, la boucle qui applique les positions de `_compute_positions` à chaque copie REPEAT_ITEM fait `_shift_group(new_el, dx=dx, dy=dy)` — elle **TRANSLATE** uniquement, sans utiliser le `(w, h)` retourné. Donc à `n=4`, les groupes sont espacés plus serré (item_w ≈ 2.98" vs ~4" pour n=3) mais chaque groupe garde la largeur originale du template, d'où le chevauchement. **Décision : Option B retenue** (cap dur + erreur explicite, vs Option A scaling dynamique des shapes internes — trop fragile sur les textframes). Ajout d'un dict `MAX_ITEMS_BY_LAYOUT = {'framework_3cards': 3}` et `_MAX_ITEMS_ALTERNATIVES` consulté en début de `_process_repeat_items` : `len(items) > max → ValueError("Layout 'framework_3cards' accepts max 3 items (got N). For more items: split into multiple slides, or use 'canvas_blank' with kpi_card blocks for 4+ cards.")`. Architecture extensible : ajouter un layout au dict suffit pour le capper. 2 nouveaux tests : `test_framework_3cards_rejects_4_cards` (4 items → ValueError citant "framework_3cards", "3", "4", "canvas_blank"), `test_framework_3cards_accepts_3_cards` (régression : 3 items → 3 groupes REPEAT_ITEM).
+
+### Changed
+- **`references/layouts.md`** : fiche `framework_3cards` mise à jour avec mention explicite du cap à 3 cartes et des alternatives (`split en plusieurs slides` ou `canvas_blank`).
+- **`references/philosophy.md`** : 2 lignes ajoutées au tableau d'anti-patterns (section 7) — "4 cartes dans framework_3cards" et "Chart line avec values au lieu de series".
+
+### Tests
+**97 passed, 1 skipped** (+7 nouveaux tests, 90 existants intacts, 0 régression).
+
+### Backups
+- `aosis-deck-builder/scripts/template_engine.before-chantier26.py`
+- `aosis-deck-builder/scripts/chart_engine.before-chantier26.py`
+
+### Origine des bugs
+Tous les 3 bugs ont été identifiés par le test A/B du Chantier 25 sur `cloud_computing_rapport.pdf`. Ils étaient présents sur les 2 versions (main et expérimentale) — donc **indépendants de la philosophie communication-first** — et n'avaient été détectés par aucun deck antérieur car les usages typiques évitaient les 3 cas pathologiques (items strings, line chart single-series, framework_3cards avec 4 piliers).
+
 ## Chantier 25 (expérimental) — Communication-first philosophy
 
 **Branche** : `experiment/communication-first-philosophy`

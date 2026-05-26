@@ -2448,3 +2448,160 @@ def test_summarize_report(capsys, tmp_path):
     # Totals: 2 critical + 1 important + 1 minor across 4 slides
     assert "2 critical" in out and "1 important" in out and "1 minor" in out
     assert "across 4 slides" in out
+
+
+# ---------------------------------------------------------------------------
+# Chantier 26 — fix 3 bugs visuels residuels (agenda numbering, chart values,
+# framework_3cards cap)
+# ---------------------------------------------------------------------------
+def test_agenda_diagonal_auto_numbering_from_strings(tmp_path):
+    """Agenda items passed as plain strings must get 01/02/03 auto-numbering.
+    Before C26, _resolve_item_value's auto-fill for 'number' was placed AFTER
+    the isinstance(item, dict) check, so string items left the template's
+    default '01' on every slot — visually identical placeholders."""
+    spec = {
+        "slides": [{
+            "layout": "agenda_diagonal",
+            "title": "Sommaire",
+            "items": [
+                "Diagnostic du marche",
+                "Vision economique",
+                "Strategie recommandee",
+                "Plan d'execution",
+                "Next steps a 90 jours",
+            ],
+        }],
+        "closing": False,
+    }
+    out = tmp_path / "agenda_strings.pptx"
+    build_deck(spec, out, template_path=TEMPLATE)
+    slide = _find_slide_by_cSld_name(Presentation(str(out)), "agenda_diagonal")
+    assert slide is not None
+    numbers = _collect_item_number_texts(slide)
+    assert numbers == ["01", "02", "03", "04", "05"], (
+        f"Expected ['01','02','03','04','05'] got {numbers}"
+    )
+
+
+def test_agenda_diagonal_explicit_numbers_preserved(tmp_path):
+    """When the user passes an explicit `number` field per item (e.g. 'A',
+    'B', 'I', '1.'), the auto-fill must NOT overwrite it."""
+    spec = {
+        "slides": [{
+            "layout": "agenda_diagonal",
+            "title": "Sommaire",
+            "items": [
+                {"number": "A", "title": "Premier point"},
+                {"number": "B", "title": "Deuxieme point"},
+                {"number": "C", "title": "Troisieme point"},
+            ],
+        }],
+        "closing": False,
+    }
+    out = tmp_path / "agenda_explicit.pptx"
+    build_deck(spec, out, template_path=TEMPLATE)
+    slide = _find_slide_by_cSld_name(Presentation(str(out)), "agenda_diagonal")
+    assert slide is not None
+    numbers = _collect_item_number_texts(slide)
+    assert numbers == ["A", "B", "C"], (
+        f"Explicit numbers must be preserved verbatim; got {numbers}"
+    )
+
+
+def test_chart_values_format_coalesced_to_series(tmp_path):
+    """`{type: line, labels: [...], values: [...]}` (single-series flat form)
+    must produce a non-empty chart. Before C26, _render_line silently
+    rendered an empty plot because it only read spec.get('series', [])."""
+    from chart_engine import render_chart_to_png
+    chart_spec = {
+        "type": "line",
+        "labels": ["2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+        "values": [42, 51, 63, 72, 81, 88, 93],
+    }
+    # 4" x 2" at 914400 EMU/inch
+    png, _, _ = render_chart_to_png(chart_spec, 914400 * 4, 914400 * 2)
+    # A blank line chart is ~ 6-15 KB; a populated one with annotations and
+    # markers is ~ 20-60 KB. Use 18 KB as a conservative lower bound.
+    assert len(png) > 18_000, (
+        f"Line chart PNG suspiciously small ({len(png)} bytes) — "
+        "likely empty plot, coalescing not applied."
+    )
+
+
+def test_chart_with_series_still_works(tmp_path):
+    """Regression: native `series=[{name, values}, ...]` format must keep
+    working unchanged (no coalescing path, no warning)."""
+    from chart_engine import render_chart_to_png
+    chart_spec = {
+        "type": "line",
+        "labels": ["Q1", "Q2", "Q3", "Q4"],
+        "series": [
+            {"name": "Realise", "values": [100, 80, 50, 25]},
+            {"name": "Cible",   "values": [100, 75, 45, 25]},
+        ],
+    }
+    png, _, _ = render_chart_to_png(chart_spec, 914400 * 4, 914400 * 2)
+    assert len(png) > 18_000, "Multi-series line chart should render fine"
+
+
+def test_chart_missing_series_and_values_raises(tmp_path):
+    """If neither `series` nor `values` is given, raise ValueError with a
+    helpful message naming both accepted formats."""
+    from chart_engine import render_chart_to_png
+    chart_spec = {"type": "bar", "labels": ["Q1", "Q2"]}
+    with pytest.raises(ValueError) as exc_info:
+        render_chart_to_png(chart_spec, 914400 * 4, 914400 * 2)
+    msg = str(exc_info.value)
+    assert "series" in msg and "values" in msg, (
+        f"Error message must mention both formats; got: {msg!r}"
+    )
+
+
+def test_framework_3cards_rejects_4_cards(tmp_path):
+    """4 items in framework_3cards must raise ValueError with a message
+    naming both the cap (3) and the canvas_blank alternative."""
+    spec = {
+        "slides": [{
+            "layout": "framework_3cards",
+            "title": "Quatre moteurs",
+            "items": [
+                {"title": "TCO",           "bullets": "• -26% en moyenne"},
+                {"title": "Agilite",       "bullets": "• Provisioning 23j -> 4h"},
+                {"title": "Scalabilite",   "bullets": "• Pics absorbes"},
+                {"title": "Modernisation", "bullets": "• Microservices"},
+            ],
+        }],
+        "closing": False,
+    }
+    out = tmp_path / "framework_too_many.pptx"
+    with pytest.raises(ValueError) as exc_info:
+        build_deck(spec, out, template_path=TEMPLATE)
+    msg = str(exc_info.value)
+    assert "framework_3cards" in msg, "Error must name the layout"
+    assert "3" in msg and "4" in msg, "Error must name both the cap and the actual count"
+    assert "canvas_blank" in msg, (
+        "Error must point to canvas_blank as the alternative for 4+ cards"
+    )
+
+
+def test_framework_3cards_accepts_3_cards(tmp_path):
+    """Regression: exactly 3 cards must still build cleanly with all three
+    {{ITEM_TITLE}} placeholders filled."""
+    spec = {
+        "slides": [{
+            "layout": "framework_3cards",
+            "title": "Trois piliers",
+            "items": [
+                {"title": "Sponsorship", "bullets": "• CODIR"},
+                {"title": "Competences", "bullets": "• Formation"},
+                {"title": "Methode",     "bullets": "• Agile"},
+            ],
+        }],
+        "closing": False,
+    }
+    out = tmp_path / "framework_three.pptx"
+    build_deck(spec, out, template_path=TEMPLATE)
+    slide = _find_slide_by_cSld_name(Presentation(str(out)), "framework_3cards")
+    assert slide is not None
+    groups = [sh for sh in slide.shapes if sh.shape_type == 6]
+    assert len(groups) == 3, f"Expected 3 cards, got {len(groups)}"
