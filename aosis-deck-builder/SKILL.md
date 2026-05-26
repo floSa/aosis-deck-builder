@@ -3,6 +3,37 @@ name: aosis-deck-builder
 description: Use this skill whenever the user asks for a PowerPoint deck, presentation, slides or pptx file at AOSIS. Triggers explicitly include the words "powerpoint", "pptx", "deck", "slides", "présentation", or any request to produce a commercial proposal, mission deliverable (restitution), or CODIR report in slide form. The skill produces a .pptx file built on top of the official AOSIS template (navy/orange palette, logo, footers, layouts inherited automatically) AND composes a rich catalogue of consulting-grade visual slides — hero statistics, big-idea statements, styled 2×2 matrices, funnels, horizontal roadmaps, framework cards, comparisons, KPI+chart combos, process steps, quote callouts, data tables, image-hero. Slides aim for the look of a top-tier consulting pitch deck (McKinsey / BCG / Bain). Always prefer this skill over the generic pptx skill for this user — every AOSIS deck must use this template, and a deck built without it will look unbranded and amateur.
 ---
 
+## Philosophie
+
+Ce skill remplace l'approche design-forward par défaut de Claude par les
+standards consulting AOSIS : **communication d'abord, design ensuite**.
+Un deck consulting n'est pas une collection de slides jolies — c'est un
+argument structuré qui convainc un COMEX/CODIR de prendre une décision.
+
+Quand ce skill est actif, Claude doit :
+
+1. Écrire chaque titre de slide comme une **phrase d'action** complète qui
+   énonce le take-away, jamais comme un mot-clé descriptif.
+2. Structurer le deck comme un **argument logique** suivant le canevas
+   consulting (Diagnostic → Vision → Stratégie → Plan → Next Steps), jamais
+   comme une collection de slides indépendantes.
+3. Appliquer le **ghost deck test** : les titres de slides lus en séquence
+   doivent raconter l'histoire complète. Si un titre pouvait être déplacé
+   n'importe où sans perte, il faut le réécrire ou supprimer la slide.
+4. Respecter la règle **une slide = un message** : un seul take-away par
+   slide, exhibits annotés pour rendre la conclusion évidente.
+5. Citer systématiquement les sources, même fictives ("Analyse AOSIS",
+   "Audit interne") en pied de slide.
+6. Terminer obligatoirement par `closing_diagonal` + `final_branding`,
+   jamais sur une slide de contenu.
+7. Appliquer la charte AOSIS : palette officielle, Arial, layouts
+   template-based prioritaires sur les layouts code-based.
+
+Pour la mise en œuvre détaillée de chacun de ces principes, voir
+[`references/philosophy.md`](references/philosophy.md). Pour les règles
+techniques par layout, voir [`references/layouts.md`](references/layouts.md).
+Pour les schémas JSON, voir [`references/json-schema.md`](references/json-schema.md).
+
 # AOSIS Deck Builder
 
 Generate AOSIS-branded PowerPoint decks that look like top-tier consulting
@@ -26,6 +57,7 @@ for the full catalogue + the table of deprecated → template-based mappings.
 
 Detailed reference material is loaded on-demand from the `references/` folder:
 
+- [`references/philosophy.md`](references/philosophy.md) — philosophie éditoriale consulting AOSIS : structure narrative, action titles, ghost deck test, discipline des exhibits, anti-patterns. **À lire en premier** avant toute génération de deck.
 - [`references/layouts.md`](references/layouts.md) — catalogue of all layouts (code-based + template-based) and when to use each.
 - [`references/json-schema.md`](references/json-schema.md) — JSON spec structure, field-by-field reference for every layout, full example.
 - [`references/qa.md`](references/qa.md) — visual and content QA workflow, symptom-to-fix lookup table.

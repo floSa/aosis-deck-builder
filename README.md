@@ -4,6 +4,19 @@ Claude Skill qui génère des présentations PowerPoint à la charte AOSIS (`.pp
 
 Le skill part toujours du template officiel `AOSIS_template.pptx`, donc la charte graphique (navy/orange, logo, Arial, footers) est héritée par construction. **17 layouts template-based** + **canvas_blank** freeform à 6 blocs (kpi_card, bullets, text, image, chart, quote).
 
+## Philosophy — Communication first, design second
+
+Ce skill remplace l'approche design-forward par défaut de Claude par les standards consulting AOSIS. La thèse : **un deck consulting n'est pas une collection de slides jolies, c'est un argument structuré qui convainc un COMEX/CODIR de trancher**.
+
+Concrètement, quand le skill est actif, Claude doit :
+
+- Écrire chaque titre comme une **phrase d'action** qui énonce le take-away (jamais un mot-clé).
+- Structurer le deck selon le canevas consulting **Diagnostic → Vision → Stratégie → Plan → Next Steps**.
+- Appliquer le **ghost deck test** : les titres lus en séquence doivent raconter l'histoire complète.
+- Respecter **une slide = un message**, exhibits annotés, sources systématiques, clôture `closing_diagonal` + `final_branding`.
+
+Le détail (structure narrative, action titles, ghost deck test, discipline des exhibits, anti-patterns, checklist QA) est codé en dur dans [`aosis-deck-builder/references/philosophy.md`](aosis-deck-builder/references/philosophy.md).
+
 ## 📚 Documentation
 
 Toute la documentation se trouve dans [`docs/`](docs/) :
