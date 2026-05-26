@@ -4,6 +4,34 @@ Toutes les modifications notables du skill `aosis-deck-builder` sont documentée
 
 ## [Unreleased]
 
+## Chantier 25 (expérimental) — Communication-first philosophy
+
+**Branche** : `experiment/communication-first-philosophy`
+**Date** : 2026-05-26
+**Statut** : Expérimental — à valider avant merge sur `main`
+
+### Ajouté
+- Section "Philosophie" en tête de `SKILL.md` (thèse fondatrice en 7 points : action titles, structure narrative consulting, ghost deck test, une slide = un message, sources systématiques, clôture obligatoire, charte AOSIS).
+- Fichier `aosis-deck-builder/references/philosophy.md` (~290 lignes) : structure narrative (canevas Diagnostic→Vision→Stratégie→Plan→Next Steps, variante Pyramid Principle "Answer First", structure restitution), action titles obligatoires avec tableau de 12 exemples consulting bons/mauvais, ghost deck test détaillé, discipline des exhibits (slide auto-suffisante, annotations, graphes vs tableaux), sources & attribution, structure obligatoire du deck, discipline du texte (40 mots/slide max, Arial, 18-20pt), tableau d'anti-patterns, checklist QA finale.
+- Section "Philosophy" dans le `README.md` racine (5 lignes thèse + pointeur vers `philosophy.md`).
+- Étape "Ghost deck test (obligatoire avant génération)" insérée dans le prompt-template renforcé de `docs/GUIDE_OPERATIONNEL.md` section 7.
+- `references/philosophy.md` ajouté à la liste de lecture obligatoire du prompt-template (en position 2, juste après `SKILL.md`).
+- Référence à `philosophy.md` dans la section "References" de `SKILL.md`.
+
+### Inspiration
+Repo [Gabberflast/academic-pptx-skill](https://github.com/Gabberflast/academic-pptx-skill) (323 stars GitHub) — approche minimaliste, communication-first, ghost deck test. Philosophie adaptée du monde académique au consulting AOSIS.
+
+### Non modifié
+- Aucun code Python touché (`scripts/` inchangé).
+- Template `AOSIS_template.pptx` inchangé.
+- Tests existants inchangés (`tests/` inchangé).
+- Fiches techniques des layouts (`references/layouts.md`) inchangées.
+- Schéma JSON technique (`references/json-schema.md`) inchangé.
+- Workflow QA (`references/qa.md`) inchangé.
+
+### Tests
+**90 passed, 1 skipped** — aucune régression (mission 100 % documentaire).
+
 ### Changed
 - **Nettoyage et réorganisation du repo** (Chantier 24, 2026-05-22). Suppression définitive du dossier `a_supprimer/` (111 MB locaux) après vérification que rien du contenu sensible n'a jamais touché Git. Récupération de **11 rapports historiques** (C1 → C8 + chantier_consolidation + chantier_exhibits + chantier_naming) depuis `a_supprimer/_archive/reports/` vers `docs/chantiers/` — `docs/chantiers/` passe de 17 → 28 rapports, couverture historique complète C1 → C24. Récupération de 2 .md uniques sur le skill (`audit_report.md` 322 lignes, `skill_documentation.md` 485 lignes, datés 2026-05-13) vers nouveau `docs/_archive_C24/`. Archivage des 2 templates RH client (70 MB) + leurs inventaires (`template_rh_*.md`) **hors repo** sous `~/Templates_RH_Client_archive/` (action utilisateur : transfert sur cloud privé recommandé). Suppression de 3 specs JSON résidus dans `examples/` (`cloud_2026_v2.json`, `cloud_2026_v3.json`, `cloud_computing_2026.json` — aucune référence code/test, seulement mentions textuelles dans rapports). Déplacement de `examples/cloud_computing_rapport.pdf` → `docs/test_inputs/`. Réécriture de `examples/README.md` (refresh post-C23 : 5 JSON listés au lieu de 2, `roadmap_styled` au lieu de `roadmap` déprécié). Backup défensif tar.gz 113 MB créé hors repo avant toute action. Tests : 90 passed, 1 skipped. Aucun changement de code du skill.
 
