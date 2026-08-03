@@ -20,7 +20,9 @@ dependencies = [
 
 [project.optional-dependencies]
 test = [
-    "pytest>=7.0,<9",
+    # 9.1 validated: the 91 smoke tests pass unchanged. Bound kept at <10 so a
+    # future major can't land silently on a skill with no CI.
+    "pytest>=7.0,<10",
 ]
 
 [tool.setuptools]
